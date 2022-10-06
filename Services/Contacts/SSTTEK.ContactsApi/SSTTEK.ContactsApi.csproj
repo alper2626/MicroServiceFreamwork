@@ -18,4 +18,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SSTTEK.Contacts.Business\SSTTEK.Contacts.Business.csproj" />
+  </ItemGroup>
+
 </Project>

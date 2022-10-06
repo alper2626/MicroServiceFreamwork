@@ -82,6 +82,8 @@ namespace MongoDbAdapter.Repository
 
         private async Task<T> Add(T entity)
         {
+            entity.CreateTime = DateTime.Now;
+            entity.UpdateTime = DateTime.Now;
             var options = new InsertOneOptions { BypassDocumentValidation = false };
             await _collection.InsertOneAsync(entity, options);
             return entity;
@@ -89,6 +91,7 @@ namespace MongoDbAdapter.Repository
 
         private async Task<T> Update(T entity)
         {
+            entity.UpdateTime = DateTime.Now;
             return await _collection.FindOneAndReplaceAsync(x => x.Id == entity.Id, entity);
         }
 

@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Databases\MongoDbAdapter\MongoDbAdapter.csproj" />
+    <ProjectReference Include="..\..\..\Common\Databases\MsSqlAdapter\MsSqlAdapter.csproj" />
     <ProjectReference Include="..\SSTTEK.Location.Entities\SSTTEK.Location.Entities.csproj" />
   </ItemGroup>
 

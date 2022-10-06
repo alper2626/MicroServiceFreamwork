@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\AdaptersAndMiddlewares\AutoMapperAdapter\AutoMapperAdapter.csproj" />
     <ProjectReference Include="..\..\..\Common\Core\Entity\EntityBase\EntityBase.csproj" />
+    <ProjectReference Include="..\..\..\Common\Databases\MongoDbExtender\MongoDbExtender.csproj" />
   </ItemGroup>
 
 </Project>

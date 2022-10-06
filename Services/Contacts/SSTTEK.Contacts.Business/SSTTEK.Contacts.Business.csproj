@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\AmqpBase\AmqpBase.csproj" />
+    <ProjectReference Include="..\..\..\Common\AdaptersAndMiddlewares\FluentValidationAdapter\FluentValidationAdapter.csproj" />
     <ProjectReference Include="..\SSTTEK.Contact.DataAccess\SSTTEK.Contact.DataAccess.csproj" />
   </ItemGroup>
 

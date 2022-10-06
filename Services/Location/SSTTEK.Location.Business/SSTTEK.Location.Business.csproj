@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AmqpBase\AmqpBase.csproj" />
+    <ProjectReference Include="..\..\..\CastleInterceptors\CastleInterceptors.csproj" />
+    <ProjectReference Include="..\..\..\Common\AdaptersAndMiddlewares\FluentValidationAdapter\FluentValidationAdapter.csproj" />
+  </ItemGroup>
+  
+</Project>

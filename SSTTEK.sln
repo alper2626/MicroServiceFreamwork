@@ -65,11 +65,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Contact.DataAccess",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.LocationApi", "Services\Location\SSTTEK.LocationApi\SSTTEK.LocationApi.csproj", "{4E7D47D3-FA3D-4544-84A3-AC83C3A8999D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.Location.Entities", "Services\Location\SSTTEK.Location.Entities\SSTTEK.Location.Entities.csproj", "{18A8D4D6-AA91-40B2-B826-34ADE213AF5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Location.Entities", "Services\Location\SSTTEK.Location.Entities\SSTTEK.Location.Entities.csproj", "{18A8D4D6-AA91-40B2-B826-34ADE213AF5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.Location.DataAccess", "Services\Location\SSTTEK.Location.DataAccess\SSTTEK.Location.DataAccess.csproj", "{0D90155D-FFE5-4EEB-98CA-C728D0C951D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Location.DataAccess", "Services\Location\SSTTEK.Location.DataAccess\SSTTEK.Location.DataAccess.csproj", "{0D90155D-FFE5-4EEB-98CA-C728D0C951D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.Location.Business", "Services\Location\SSTTEK.Location.Business\SSTTEK.Location.Business.csproj", "{6B509128-E4BE-420C-937F-7DDAB0277560}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Location.Business", "Services\Location\SSTTEK.Location.Business\SSTTEK.Location.Business.csproj", "{6B509128-E4BE-420C-937F-7DDAB0277560}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDbExtender", "Common\Databases\MongoDbExtender\MongoDbExtender.csproj", "{1625EA17-5205-49D9-A19F-52BCD508DE45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -165,6 +167,10 @@ Global
 		{6B509128-E4BE-420C-937F-7DDAB0277560}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B509128-E4BE-420C-937F-7DDAB0277560}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B509128-E4BE-420C-937F-7DDAB0277560}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1625EA17-5205-49D9-A19F-52BCD508DE45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1625EA17-5205-49D9-A19F-52BCD508DE45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1625EA17-5205-49D9-A19F-52BCD508DE45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1625EA17-5205-49D9-A19F-52BCD508DE45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -201,6 +207,7 @@ Global
 		{18A8D4D6-AA91-40B2-B826-34ADE213AF5E} = {1D5C4345-E878-46C2-9FB1-219C728A5E47}
 		{0D90155D-FFE5-4EEB-98CA-C728D0C951D5} = {1D5C4345-E878-46C2-9FB1-219C728A5E47}
 		{6B509128-E4BE-420C-937F-7DDAB0277560} = {1D5C4345-E878-46C2-9FB1-219C728A5E47}
+		{1625EA17-5205-49D9-A19F-52BCD508DE45} = {05704D43-67EF-4D78-B508-BC58F4F5A0B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {933ABDA7-FF88-4E51-BBAE-690E0B356FAB}

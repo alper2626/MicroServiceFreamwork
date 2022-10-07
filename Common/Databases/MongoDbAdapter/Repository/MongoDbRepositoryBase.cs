@@ -50,9 +50,8 @@ namespace MongoDbAdapter.Repository
                     if (typeof(IRemovableEntity).IsAssignableFrom(entity.GetType()))
                     {
                         (entity as IRemovableEntity).IsRemoved = true;
-                        return this.Update(entity).Result
                     }
-                    break;
+                    return this.Update(entity).Result;
                 case OperationType.Delete:
                     return Delete(entity).Result;
                 default:

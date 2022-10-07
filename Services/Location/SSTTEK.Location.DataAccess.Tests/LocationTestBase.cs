@@ -7,8 +7,7 @@ using TestBase;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Xunit.Microsoft.DependencyInjection;
-using ServerBaseContract.Repository.Abstract;
-using MongoDbAdapter.Repository;
+using RedisCacheService.Models;
 
 namespace SSTTEK.Location.DataAccess.Tests
 {
@@ -30,7 +29,18 @@ namespace SSTTEK.Location.DataAccess.Tests
             });
             #endregion
 
-            services.AddTransient(typeof(IEntityRepositoryBase<>), typeof(MongoDbRepositoryBase<>));
+
+            #region RedisConfigurations
+            services.Configure<RedisOptions>(options =>
+            {
+                configuration.GetSection("RedisOptions").Bind(options);
+            });
+            services.AddTransient(sp =>
+            {
+                return sp.GetRequiredService<IOptions<RedisOptions>>().Value;
+            });
+            #endregion
+
         }
 
         protected override ValueTask DisposeAsyncCore() => new();

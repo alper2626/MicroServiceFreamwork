@@ -1,6 +1,8 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using RedisCacheService.Models;
 using ServerBaseContract;
+using StackExchange.Redis;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -26,6 +28,22 @@ namespace SSTTEK.Location.DataAccess.Tests.Concrete
             db.RunCommandAsync((Command<BsonDocument>)"{ping:1}")
             .Wait();
 
+        }
+
+
+        [Fact]
+        public void ConnectToRedisTest()
+        {
+            var options = GetService<RedisOptions>(_testOutputHelper);
+            var configString = $"{options.Host}:{options.Port}";
+
+            var _redis = ConnectionMultiplexer.Connect(configString, (opt) =>
+            {
+                opt.Password = options.Password;
+                opt.AbortOnConnectFail = false;
+            });
+
+            Assert.True(_redis.IsConnected);
         }
     }
 }

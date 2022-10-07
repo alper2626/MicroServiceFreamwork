@@ -10,4 +10,9 @@
     <ProjectReference Include="..\..\..\Common\Core\Entity\EntityBase\EntityBase.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Poco\ContactInformationDto\" />
+    <Folder Include="Poco\ContactDto\" />
+  </ItemGroup>
+
 </Project>

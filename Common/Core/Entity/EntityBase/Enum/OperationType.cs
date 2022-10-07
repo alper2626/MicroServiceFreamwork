@@ -13,8 +13,10 @@ namespace EntityBase.Enum
         Update = 200,
         [Description("Silme")]
         Delete = 300,
+        [Description("Kaldırma")]
+        Remove = 400,
         [Description("Okuma")]
-        Read = 400
+        Read = 500
     }
 
 }

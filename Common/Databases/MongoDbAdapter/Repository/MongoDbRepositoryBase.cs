@@ -46,6 +46,13 @@ namespace MongoDbAdapter.Repository
                     return Add(entity).Result;
                 case OperationType.Update:
                     return Update(entity).Result;
+                case OperationType.Remove:
+                    if (typeof(IRemovableEntity).IsAssignableFrom(entity.GetType()))
+                    {
+                        (entity as IRemovableEntity).IsRemoved = true;
+                        return this.Update(entity).Result
+                    }
+                    break;
                 case OperationType.Delete:
                     return Delete(entity).Result;
                 default:
@@ -56,6 +63,10 @@ namespace MongoDbAdapter.Repository
         public IEnumerable<T>? SetState(IEnumerable<T> entities, OperationType state)
         {
             var turnList = new List<T>();
+            if (entities == null || !entities.Any())
+            {
+                return turnList;
+            }
             switch (state)
             {
                 case OperationType.Create:
@@ -68,6 +79,16 @@ namespace MongoDbAdapter.Repository
                     foreach (var item in entities)
                     {
                         turnList.Add(this.Update(item).Result);
+                    }
+                    break;
+                case OperationType.Remove:
+                    if (typeof(IRemovableEntity).IsAssignableFrom(entities.First().GetType()))
+                    {
+                        foreach (var item in entities)
+                        {
+                            (item as IRemovableEntity).IsRemoved = true;
+                            turnList.Add(this.Update(item).Result);
+                        }
                     }
                     break;
                 case OperationType.Delete:
@@ -101,5 +122,6 @@ namespace MongoDbAdapter.Repository
         {
             return await _collection.FindOneAndDeleteAsync(x => x.Id == entity.Id);
         }
+
     }
 }

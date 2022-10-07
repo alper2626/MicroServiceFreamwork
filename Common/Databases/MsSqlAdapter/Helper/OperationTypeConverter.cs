@@ -21,7 +21,7 @@ namespace MsSqlAdapter.Helper
             switch (operation)
             {
                 case OperationType.Create: return EntityState.Added;
-                case OperationType.Update: return EntityState.Modified;
+                case OperationType.Update: case OperationType.Remove: return EntityState.Modified;
                 case OperationType.Delete: return EntityState.Deleted;
                 default: return EntityState.Unchanged;
             }

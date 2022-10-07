@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSTTEK.Contacts.Entities.Db
 {
-    public class ContactInformationEntity : Entity
+    public class ContactInformationEntity : RemovableEntity
     {
         public Guid ContactEntityId { get; set; }
 
@@ -19,7 +19,6 @@ namespace SSTTEK.Contacts.Entities.Db
 
         public string ContentIndex { get; set; }
 
-        public bool IsRemoved { get; set; }
     }
 
     public class ContactInformationEntityProfile : Profile

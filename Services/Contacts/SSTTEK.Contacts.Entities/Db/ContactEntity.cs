@@ -4,15 +4,13 @@ using SSTTEK.Contacts.Entities.Poco.ContactDto;
 
 namespace SSTTEK.Contacts.Entities.Db
 {
-    public class ContactEntity : Entity
+    public class ContactEntity : RemovableEntity
     {
         public string Name { get; set; }
 
         public string LastName { get; set; }
 
         public string Firm { get; set; }
-
-        public bool IsRemoved { get; set; }
 
         public virtual ICollection<ContactInformationEntity> ContactInformationEntities { get; set; }
     }

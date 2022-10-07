@@ -16,7 +16,7 @@ namespace MsSqlAdapter.Repository
         {
             using (var context = new TContext())
             {
-                return await(filter != null ? context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(filter) :
+                return await (filter != null ? context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(filter) :
                                                context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync());
             }
         }
@@ -25,7 +25,7 @@ namespace MsSqlAdapter.Repository
         {
             using (var context = new TContext())
             {
-                return await(filter != null ? context.Set<TEntity>().AsNoTracking().Where(filter).ToListAsync() :
+                return await (filter != null ? context.Set<TEntity>().AsNoTracking().Where(filter).ToListAsync() :
                                                context.Set<TEntity>().AsNoTracking().ToListAsync());
             }
         }
@@ -34,6 +34,10 @@ namespace MsSqlAdapter.Repository
         {
             using (var context = new TContext())
             {
+                if (state == OperationType.Remove && typeof(IRemovableEntity).IsAssignableFrom(entity.GetType()))
+                {
+                    (entity as IRemovableEntity).IsRemoved = true;
+                }
                 if (SetState(entity, state, context) == null)
                 {
                     return null;
@@ -52,8 +56,14 @@ namespace MsSqlAdapter.Repository
                 {
                     try
                     {
+                        var removeFlag = (state == OperationType.Remove && typeof(IRemovableEntity).IsAssignableFrom(entities.First().GetType()));
+
                         foreach (var item in entities)
                         {
+                            if (removeFlag)
+                            {
+                                (item as IRemovableEntity).IsRemoved = true;
+                            }
                             if (SetState(item, state, context) == null)
                             {
                                 tran.Dispose();

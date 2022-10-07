@@ -22,4 +22,9 @@ namespace EntityBase.Abstract
         public DateTime UpdateTime { get; set; }
     }
 
+    public interface IRemovableEntity : IEntity
+    {
+        bool IsRemoved { get; set; }
+    }
+
 }

@@ -25,4 +25,9 @@ namespace EntityBase.Concrete
         public DateTime UpdateTime { get; set; }
     }
 
+    public class RemovableEntity : Entity, IRemovableEntity
+    {
+        public bool IsRemoved { get; set; }
+    }
+
 }

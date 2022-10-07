@@ -93,15 +93,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Contact.Business.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.ContactInformation.Api", "Services\ContactInformation\SSTTEK.ContactInformation.Api\SSTTEK.ContactInformation.Api.csproj", "{512D3DE3-E4F4-4FD5-B341-0E14D6F2D256}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.ContactInformation.Business", "Services\ContactInformation\SSTTEK.ContactInformation.Business\SSTTEK.ContactInformation.Business.csproj", "{8A69E678-B6C6-46FB-B5DF-DF41D6E63187}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.ContactInformation.Business", "Services\ContactInformation\SSTTEK.ContactInformation.Business\SSTTEK.ContactInformation.Business.csproj", "{8A69E678-B6C6-46FB-B5DF-DF41D6E63187}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.ContactInformation.DataAccess", "Services\ContactInformation\SSTTEK.ContactInformation.DataAccess\SSTTEK.ContactInformation.DataAccess.csproj", "{0BB9178E-A747-44D1-9B3B-F94B7F6855A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.ContactInformation.DataAccess", "Services\ContactInformation\SSTTEK.ContactInformation.DataAccess\SSTTEK.ContactInformation.DataAccess.csproj", "{0BB9178E-A747-44D1-9B3B-F94B7F6855A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.ContactInformation.Entities", "Services\ContactInformation\SSTTEK.ContactInformation.Entities\SSTTEK.ContactInformation.Entities.csproj", "{4EB2AD9C-82DE-4AF4-9801-AD9E219A2F3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.ContactInformation.Entities", "Services\ContactInformation\SSTTEK.ContactInformation.Entities\SSTTEK.ContactInformation.Entities.csproj", "{4EB2AD9C-82DE-4AF4-9801-AD9E219A2F3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.ContactInformation.Business.Tests", "Services\ContactInformation\SSTTEK.ContactInformation.Business.Tests\SSTTEK.ContactInformation.Business.Tests.csproj", "{F4CB3EEB-AE8B-4F5F-8CBD-AE38750FE053}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.ContactInformation.Business.Tests", "Services\ContactInformation\SSTTEK.ContactInformation.Business.Tests\SSTTEK.ContactInformation.Business.Tests.csproj", "{F4CB3EEB-AE8B-4F5F-8CBD-AE38750FE053}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.ContactInformation.DataAccess.Tests", "Services\ContactInformation\SSTTEK.ContactInformation.DataAccess.Tests\SSTTEK.ContactInformation.DataAccess.Tests.csproj", "{A07EC730-677E-4662-9C7A-127045337C5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.ContactInformation.DataAccess.Tests", "Services\ContactInformation\SSTTEK.ContactInformation.DataAccess.Tests\SSTTEK.ContactInformation.DataAccess.Tests.csproj", "{A07EC730-677E-4662-9C7A-127045337C5B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E8DCA563-8820-47BF-9F1B-E3D72B5BCFC8}"
+	ProjectSection(SolutionItems) = preProject
+		TaskList.txt = TaskList.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

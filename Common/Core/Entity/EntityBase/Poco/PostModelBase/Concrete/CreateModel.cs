@@ -27,6 +27,7 @@ namespace EntityBase.Concrete
             }
         }
 
+        [JsonIgnore]
         public DateTime CreateTime => DateTime.Now;
 
 

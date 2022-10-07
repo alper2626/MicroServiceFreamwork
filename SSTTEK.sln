@@ -79,13 +79,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{0EC136FD-C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestBase", "Test\TestBase\TestBase.csproj", "{61C2D9A1-6DA8-487F-A194-04987616EA62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.Contact.Business.Tests", "Services\Contacts\SSTTEK.Contact.Business.Tests\SSTTEK.Contact.Business.Tests.csproj", "{5AC8DC9E-AEF0-43A6-8915-55FC104B1325}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Contact.Business.Tests", "Services\Contacts\SSTTEK.Contact.Business.Tests\SSTTEK.Contact.Business.Tests.csproj", "{5AC8DC9E-AEF0-43A6-8915-55FC104B1325}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.Contact.DataAccess.Tests", "Services\Contacts\SSTTEK.Contact.DataAccess.Tests\SSTTEK.Contact.DataAccess.Tests.csproj", "{A73B2C8D-DD19-4277-9075-1AB9850A01E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Contact.DataAccess.Tests", "Services\Contacts\SSTTEK.Contact.DataAccess.Tests\SSTTEK.Contact.DataAccess.Tests.csproj", "{A73B2C8D-DD19-4277-9075-1AB9850A01E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.Location.Business.Tests", "Services\Location\SSTTEK.Location.Business.Tests\SSTTEK.Location.Business.Tests.csproj", "{898E77B4-3BBF-45F1-9977-9FA2C82ADF9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Location.Business.Tests", "Services\Location\SSTTEK.Location.Business.Tests\SSTTEK.Location.Business.Tests.csproj", "{898E77B4-3BBF-45F1-9977-9FA2C82ADF9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.Location.DataAccess.Tests", "Services\Location\SSTTEK.Location.DataAccess.Tests\SSTTEK.Location.DataAccess.Tests.csproj", "{560009BE-8CBC-4C9D-A389-08FFC4290EA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Location.DataAccess.Tests", "Services\Location\SSTTEK.Location.DataAccess.Tests\SSTTEK.Location.DataAccess.Tests.csproj", "{560009BE-8CBC-4C9D-A389-08FFC4290EA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgresAdapter", "Common\Databases\PostgresAdapter\PostgresAdapter.csproj", "{137F2845-44DE-4D4E-B917-879555A3B23A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -209,6 +211,10 @@ Global
 		{560009BE-8CBC-4C9D-A389-08FFC4290EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{560009BE-8CBC-4C9D-A389-08FFC4290EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{560009BE-8CBC-4C9D-A389-08FFC4290EA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{137F2845-44DE-4D4E-B917-879555A3B23A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{137F2845-44DE-4D4E-B917-879555A3B23A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{137F2845-44DE-4D4E-B917-879555A3B23A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{137F2845-44DE-4D4E-B917-879555A3B23A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -253,6 +259,7 @@ Global
 		{A73B2C8D-DD19-4277-9075-1AB9850A01E4} = {11C35C41-FB26-4D58-87F5-D483E7DAC81C}
 		{898E77B4-3BBF-45F1-9977-9FA2C82ADF9C} = {1D5C4345-E878-46C2-9FB1-219C728A5E47}
 		{560009BE-8CBC-4C9D-A389-08FFC4290EA3} = {1D5C4345-E878-46C2-9FB1-219C728A5E47}
+		{137F2845-44DE-4D4E-B917-879555A3B23A} = {05704D43-67EF-4D78-B508-BC58F4F5A0B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {933ABDA7-FF88-4E51-BBAE-690E0B356FAB}

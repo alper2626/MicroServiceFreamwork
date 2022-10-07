@@ -1,17 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using MsSqlAdapter.Context;
+using PostgresAdapter.Context;
 using RestHelpers.DIHelpers;
 using ServerBaseContract;
-using SSTTEK.Contact.Entities.Db;
+using SSTTEK.ContactInformation.Entities.Db;
 
-namespace SSTTEK.Contact.DataAccess.Context
+namespace SSTTEK.ContactInformation.DataAccess.Context
 {
-    public class ContactModuleContext : MsSqlDbContext
+    public class ContactInformationModuleContext : PostgreSqlDbContext
     {
         protected override DatabaseOptions Options { get; set; }
 
-        public ContactModuleContext()
+        public ContactInformationModuleContext()
         {
             Options = ServiceTool.ServiceProvider.GetService<DatabaseOptions>();
         }
@@ -20,15 +20,18 @@ namespace SSTTEK.Contact.DataAccess.Context
         /// For Migrate
         /// </summary>
         /// <param name="options"></param>
-        public ContactModuleContext(DatabaseOptions options)
+        public ContactInformationModuleContext(DatabaseOptions options)
         {
             Options = options;
         }
 
-        public virtual DbSet<ContactEntity> Contacts { get; set; }
+        public virtual DbSet<ContactInformationEntity> ContactInformations { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ContactInformationEntity>().HasIndex(w => w.ContentIndex);
+
             base.OnModelCreating(modelBuilder);
         }
     }

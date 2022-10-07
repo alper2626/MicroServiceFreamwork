@@ -6,4 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AmqpBase\AmqpBase.csproj" />
+    <ProjectReference Include="..\..\..\CastleInterceptors\CastleInterceptors.csproj" />
+    <ProjectReference Include="..\..\..\Common\AdaptersAndMiddlewares\FluentValidationAdapter\FluentValidationAdapter.csproj" />
+    <ProjectReference Include="..\SSTTEK.ContactInformation.DataAccess\SSTTEK.ContactInformation.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

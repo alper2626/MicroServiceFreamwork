@@ -1,7 +1,7 @@
 ﻿using ServerBaseContract.Repository.Abstract;
-using SSTTEK.Contact.Entities.Db;
+using SSTTEK.ContactInformation.Entities.Db;
 
-namespace SSTTEK.Contact.DataAccess.Contract
+namespace SSTTEK.ContactInformation.DataAccess.Contract
 {
     public interface IContactInformationDal : IEntityRepositoryBase<ContactInformationEntity>
     {

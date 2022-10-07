@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SSTTEK.Contact.DataAccess.Context;
 
@@ -11,9 +12,10 @@ using SSTTEK.Contact.DataAccess.Context;
 namespace SSTTEK.Contact.DataAccess.Migrations
 {
     [DbContext(typeof(ContactModuleContext))]
-    partial class ContactModuleContextModelSnapshot : ModelSnapshot
+    [Migration("20221007212527_firstmig")]
+    partial class firstmig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

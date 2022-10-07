@@ -1,8 +1,8 @@
 ﻿using EntityBase.Concrete;
 using Extensions.EnumExtensions;
-using SSTTEK.Contact.Entities.Enum;
+using SSTTEK.ContactInformation.Entities.Enum;
 
-namespace SSTTEK.Contact.Entities.Poco.ContactInformationDto
+namespace SSTTEK.ContactInformation.Entities.Poco.ContactInformationDto
 {
     public class ContactInformationResponse : GetModel
     {

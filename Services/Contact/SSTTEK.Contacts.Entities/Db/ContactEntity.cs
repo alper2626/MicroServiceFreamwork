@@ -11,8 +11,6 @@ namespace SSTTEK.Contact.Entities.Db
         public string LastName { get; set; }
 
         public string Firm { get; set; }
-
-        public virtual ICollection<ContactInformationEntity> ContactInformationEntities { get; set; }
     }
 
     public class ContactEntityProfile : Profile

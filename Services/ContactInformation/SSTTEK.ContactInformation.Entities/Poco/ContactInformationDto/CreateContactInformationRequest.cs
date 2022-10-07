@@ -1,8 +1,8 @@
 ﻿using EntityBase.Concrete;
-using SSTTEK.Contact.Entities.Enum;
+using SSTTEK.ContactInformation.Entities.Enum;
 using System.Text.Json.Serialization;
 
-namespace SSTTEK.Contact.Entities.Poco.ContactInformationDto
+namespace SSTTEK.ContactInformation.Entities.Poco.ContactInformationDto
 {
     public class CreateContactInformationRequest : CreateModel
     {

@@ -2,9 +2,9 @@
 using EntityBase.Poco.Responses;
 using Microsoft.AspNetCore.Mvc;
 using RestHelpers.Controllers;
-using SSTTEK.Contact.Entities.Poco.ContactInformationDto;
+using SSTTEK.ContactInformation.Entities.Poco.ContactInformationDto;
 
-namespace SSTTEK.Contact.Api.Controllers
+namespace SSTTEK.ContactInformation.Api.Controllers
 {
     [Route("api/[controller]")]
     public class ContactInformationsController : ApiControllerBase

@@ -1,9 +1,10 @@
 ﻿using FluentValidation;
-using SSTTEK.Contact.Business.Constants;
-using SSTTEK.Contact.Entities.Poco.ContactInformationDto;
+using SSTTEK.ContactInformation.Business.Constants;
+using SSTTEK.ContactInformation.Entities.Enum;
+using SSTTEK.ContactInformation.Entities.Poco.ContactInformationDto;
 using Tools.ObjectHelpers;
 
-namespace SSTTEK.Contact.Business.Validators.ContactInformation
+namespace SSTTEK.ContactInformation.Business.Validators.ContactInformation
 {
     public class CreateContactInformationRequestValidator : AbstractValidator<CreateContactInformationRequest>
     {
@@ -20,11 +21,11 @@ namespace SSTTEK.Contact.Business.Validators.ContactInformation
         {
             switch (model.ContactInformationType)
             {
-                case Entities.Enum.ContactInformationType.PhoneNumber:
+                case ContactInformationType.PhoneNumber:
                     return StringHelper.IsValidPhoneNumber(model.Content);
-                case Entities.Enum.ContactInformationType.MailAddress:
+                case ContactInformationType.MailAddress:
                     return StringHelper.IsValidMailAddress(model.Content);
-                case Entities.Enum.ContactInformationType.Location:
+                case ContactInformationType.Location:
                 default:
                     return true;
             }

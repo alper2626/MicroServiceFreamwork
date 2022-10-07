@@ -104,8 +104,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.InjectContact(
     new DatabaseOptions {ConnectionString = builder.Configuration["DatabaseOptions:ConnectionString"],DatabaseName = builder.Configuration["DatabaseOptions:DatabaseName"] },
     Convert.ToBoolean(builder.Configuration["DatabaseChanged"]));
+
 /// <summary>
-/// Tüm Di lar enjecte oldu provider ý olustur.
+/// Tüm Di lar enjecte oldu provider ý olustur. Ayný zamanda bu çaðýrýlmassa migration çalýþmaz.
 /// </summary>
 var services = ServiceTool.Create(builder.Services);
 

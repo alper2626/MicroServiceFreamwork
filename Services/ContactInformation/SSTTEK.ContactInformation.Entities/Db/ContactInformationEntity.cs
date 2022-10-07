@@ -1,17 +1,13 @@
 ﻿using AutoMapper;
 using EntityBase.Concrete;
-using SSTTEK.Contact.Entities.Enum;
-using SSTTEK.Contact.Entities.Poco.ContactInformationDto;
-using System.ComponentModel.DataAnnotations.Schema;
+using SSTTEK.ContactInformation.Entities.Enum;
+using SSTTEK.ContactInformation.Entities.Poco.ContactInformationDto;
 
-namespace SSTTEK.Contact.Entities.Db
+namespace SSTTEK.ContactInformation.Entities.Db
 {
     public class ContactInformationEntity : RemovableEntity
     {
         public Guid ContactEntityId { get; set; }
-
-        [ForeignKey("ContactEntityId")]
-        public virtual ContactEntity ContactEntity { get; set; }
 
         public ContactInformationType ContactInformationType { get; set; }
 

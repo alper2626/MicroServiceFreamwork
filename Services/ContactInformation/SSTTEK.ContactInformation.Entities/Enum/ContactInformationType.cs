@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SSTTEK.Contact.Entities.Enum
+namespace SSTTEK.ContactInformation.Entities.Enum
 {
     public enum ContactInformationType
     {

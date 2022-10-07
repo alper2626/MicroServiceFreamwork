@@ -8,10 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Core\Entity\EntityBase\EntityBase.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Poco\ContactInformationDto\" />
+    <ProjectReference Include="..\..\..\Common\Tools\Tools.csproj" />
   </ItemGroup>
 
 </Project>

@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\CastleInterceptors\CastleInterceptors.csproj" />
     <ProjectReference Include="..\..\..\CommonMiddlewares\CommonMiddlewares.csproj" />
     <ProjectReference Include="..\SSTTEK.Location.Business\SSTTEK.Location.Business.csproj" />

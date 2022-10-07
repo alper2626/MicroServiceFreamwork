@@ -23,7 +23,9 @@ namespace MongoDbAdapter.Repository
 
         public virtual async Task<T?> GetAsync(Expression<Func<T, bool>>? filter = null)
         {
-            return await _collection.Find(filter).FirstOrDefaultAsync();
+            return filter == null ?
+                await _collection.Find(x => true).FirstOrDefaultAsync() :
+                await _collection.Find(filter).FirstOrDefaultAsync();
 
         }
 

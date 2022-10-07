@@ -6,7 +6,7 @@ services:
         environment:
             MONGO_INITDB_ROOT_USERNAME: abasda
             MONGO_INITDB_ROOT_PASSWORD: Neslican2626
-            MONGO_INITDB_DATABASE: firstMongoDb
+            MONGO_INITDB_DATABASE: locationMongoDb
         ports:
             - 27017:27017
         volumes:

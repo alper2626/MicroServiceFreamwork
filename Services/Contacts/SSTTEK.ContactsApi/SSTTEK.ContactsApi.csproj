@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -23,6 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\CastleInterceptors\CastleInterceptors.csproj" />
+    <ProjectReference Include="..\..\..\CommonMiddlewares\CommonMiddlewares.csproj" />
     <ProjectReference Include="..\SSTTEK.Contacts.Business\SSTTEK.Contacts.Business.csproj" />
   </ItemGroup>
 

@@ -1,16 +1,33 @@
 using AmqpBase.MassTransit.RabbitMq.Middlewares;
-using AmqpBase.Model;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using AutoMapperAdapter;
+using CastleInterceptors.AutoFacModule;
+using CommonMiddlewares;
 using FluentValidation.AspNetCore;
+using FluentValidationAdapter;
 using FluentValidationAdapter.Filter;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using RestHelpers.DIHelpers;
 using ServerBaseContract;
-using SSTTEK.Contact.DataAccess.Context;
 using SSTTEK.ContactsApi.Middlewares;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+var businessAssembly = Assembly.Load(Assembly.GetExecutingAssembly().GetReferencedAssemblies().SingleOrDefault(q => q.FullName.Contains("Contact.Business")));
+
+
+#region Add Interceptors
+
+builder.Host
+    .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureContainer<ContainerBuilder>(cfg =>
+    {
+        cfg.RegisterModule(new InterceptorsAutoFacModule(businessAssembly));
+    });
+
+#endregion
 
 #region Add Controllers And Filters
 
@@ -22,13 +39,20 @@ builder.Services.AddControllers(options =>
 
 #endregion
 
+#region Add Core Di
+
+builder.Services.AddCore();
+
+#endregion
+
 #region Add Fluent Validation
 
-builder.Services.AddFluentValidationAutoValidation(options =>
+builder.Services.AddFluentValidation(options =>
 {
     // Validate child properties and root collection elements
     options.ImplicitlyValidateChildProperties = true;
     options.ImplicitlyValidateRootCollectionElements = true;
+    options.Configure();
 });
 
 #endregion
@@ -63,6 +87,12 @@ builder.Services.AddRabbitMqModules(
         UserName = builder.Configuration["RabbitMq:UserName"],
         Port = ushort.Parse(builder.Configuration["RabbitMq:Port"]),
     });
+
+#endregion
+
+#region AutoMapper Configuration
+
+AutoMapperWrapper.Configure();
 
 #endregion
 

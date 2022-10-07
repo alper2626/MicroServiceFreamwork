@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
@@ -19,6 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\CastleInterceptors\CastleInterceptors.csproj" />
+    <ProjectReference Include="..\..\..\CommonMiddlewares\CommonMiddlewares.csproj" />
     <ProjectReference Include="..\SSTTEK.Location.Business\SSTTEK.Location.Business.csproj" />
   </ItemGroup>
 

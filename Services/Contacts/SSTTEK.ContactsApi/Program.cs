@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using RestHelpers.DIHelpers;
 using ServerBaseContract;
 using SSTTEK.Contact.DataAccess.Context;
+using SSTTEK.ContactsApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,7 +42,8 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 builder.Services.Configure<DatabaseOptions>(options =>
 {
-    options.ConnectionString = builder.Configuration.GetValue<string>("ConnectionString");
+    options.ConnectionString = builder.Configuration["DatabaseOptions:ConnectionString"];
+    options.DatabaseName = builder.Configuration["DatabaseOptions:DatabaseName"];
 });
 builder.Services.AddSingleton<DatabaseOptions>(sp =>
 {
@@ -57,9 +59,9 @@ builder.Services.AddRabbitMqModules(
     new AmqpBase.Model.RabbitMqOptions
     {
         Host = builder.Configuration["RabbitMq:Host"],
-        Password = builder.Configuration["Password"],
-        UserName = builder.Configuration["UserName"],
-        Port = ushort.Parse(builder.Configuration["Port"]),
+        Password = builder.Configuration["RabbitMq:Password"],
+        UserName = builder.Configuration["RabbitMq:UserName"],
+        Port = ushort.Parse(builder.Configuration["RabbitMq:Port"]),
     });
 
 #endregion
@@ -68,19 +70,14 @@ builder.Services.AddRabbitMqModules(
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.InjectContact(
+    new DatabaseOptions {ConnectionString = builder.Configuration["DatabaseOptions:ConnectionString"],DatabaseName = builder.Configuration["DatabaseOptions:DatabaseName"] },
+    Convert.ToBoolean(builder.Configuration["DatabaseChanged"]));
 /// <summary>
 /// Tüm Di lar enjecte oldu provider ý olustur.
 /// </summary>
 var services = ServiceTool.Create(builder.Services);
-
-/// <summary>
-/// Database de deðiþiklik var ise migrate et.
-/// </summary>
-if (Convert.ToBoolean(builder.Configuration["DatabaseChanged"]))
-{
-    var context = ServiceTool.ServiceProvider.GetRequiredService<ContactModuleContext>();
-    context.Database.Migrate();
-}
 
 
 var app = builder.Build();

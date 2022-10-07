@@ -1,0 +1,60 @@
+services:
+    mongodb:
+        image: mongo:latest
+        container_name: locationDb
+        restart: unless-stopped
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: abasda
+            MONGO_INITDB_ROOT_PASSWORD: Neslican2626
+            MONGO_INITDB_DATABASE: locations
+        ports:
+            - 27017:27017
+        volumes:
+            - mongodb
+        networks:
+            - mongonetwork    
+        healthcheck:
+            test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+            retries: 5
+            interval: 15s
+            start_period: 30s
+    mongo-express:
+        image: mongo-express
+        container_name: mongoexpress
+        restart: unless-stopped
+        environment:
+            - ME_CONFIG_MONGODB_SERVER=mongodb
+            - ME_CONFIG_MONGODB_PORT=27017
+            - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+            - ME_CONFIG_MONGODB_AUTH_USERNAME=abasda
+            - ME_CONFIG_MONGODB_AUTH_PASSWORD=Neslican2626
+            - ME_CONFIG_BASICAUTH_USERNAME=abasda
+            - ME_CONFIG_BASICAUTH_PASSWORD=Neslican2626
+            - ME_CONFIG_MONGODB_ADMINUSERNAME=abasda
+            - ME_CONFIG_MONGODB_ADMINPASSWORD=Neslican2626
+        depends_on:
+            mongodb:
+                condition: service_healthy
+        links:
+            - mongodb:mongodb
+        ports:
+          - 8081:8081
+        volumes: 
+            - mongoexpress
+        networks:
+          - mongonetwork 
+        
+volumes:
+  locationDb:
+    name: locationVolume
+    driver: local
+    external: false
+  mongoexpress:
+    name: mongoExpressVolume
+    driver: local
+    external: false
+  
+networks:
+  mongonetwork:
+    name: mongonetwork
+    driver: bridge    

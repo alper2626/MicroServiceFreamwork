@@ -16,6 +16,15 @@ namespace SSTTEK.Contact.DataAccess.Context
             Options = ServiceTool.ServiceProvider.GetService<DatabaseOptions>();
         }
 
+        /// <summary>
+        /// For Migrate
+        /// </summary>
+        /// <param name="options"></param>
+        public ContactModuleContext(DatabaseOptions options)
+        {
+            Options = options;
+        }
+
         public virtual DbSet<ContactEntity> Contacts { get; set; }
 
         public virtual DbSet<ContactInformationEntity> ContactInformations { get; set; }

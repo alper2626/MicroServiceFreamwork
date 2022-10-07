@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using RestHelpers.Controllers;
 using SSTTEK.Location.Entities.Poco.Location;
 
-namespace SSTTEK.LocationApi.Controllers
+namespace SSTTEK.Location.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

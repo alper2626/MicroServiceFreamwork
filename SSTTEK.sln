@@ -55,7 +55,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MassTransitCommon", "MassTr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.MassTransitCommon", "Services\MassTransitCommon\SSTTEK.MassTransitCommon\SSTTEK.MassTransitCommon.csproj", "{5B5AA556-77A1-416A-915B-8EF6ED9A8B85}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.LocationApi", "Services\Location\SSTTEK.LocationApi\SSTTEK.LocationApi.csproj", "{4E7D47D3-FA3D-4544-84A3-AC83C3A8999D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Location.Api", "Services\Location\SSTTEK.LocationApi\SSTTEK.Location.Api.csproj", "{4E7D47D3-FA3D-4544-84A3-AC83C3A8999D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Location.Entities", "Services\Location\SSTTEK.Location.Entities\SSTTEK.Location.Entities.csproj", "{18A8D4D6-AA91-40B2-B826-34ADE213AF5E}"
 EndProject
@@ -90,6 +90,18 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Contact.DataAccess.Tests", "Services\Contact\SSTTEK.Contact.DataAccess.Tests\SSTTEK.Contact.DataAccess.Tests.csproj", "{E1D0B57C-714F-4AFB-B005-4359BA42D7FE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Contact.Business.Tests", "Services\Contact\SSTTEK.Contact.Business.Tests\SSTTEK.Contact.Business.Tests.csproj", "{3C9B6420-86AD-49D4-82D5-CC179CCFF9EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.ContactInformation.Api", "Services\ContactInformation\SSTTEK.ContactInformation.Api\SSTTEK.ContactInformation.Api.csproj", "{512D3DE3-E4F4-4FD5-B341-0E14D6F2D256}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.ContactInformation.Business", "Services\ContactInformation\SSTTEK.ContactInformation.Business\SSTTEK.ContactInformation.Business.csproj", "{8A69E678-B6C6-46FB-B5DF-DF41D6E63187}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.ContactInformation.DataAccess", "Services\ContactInformation\SSTTEK.ContactInformation.DataAccess\SSTTEK.ContactInformation.DataAccess.csproj", "{0BB9178E-A747-44D1-9B3B-F94B7F6855A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.ContactInformation.Entities", "Services\ContactInformation\SSTTEK.ContactInformation.Entities\SSTTEK.ContactInformation.Entities.csproj", "{4EB2AD9C-82DE-4AF4-9801-AD9E219A2F3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.ContactInformation.Business.Tests", "Services\ContactInformation\SSTTEK.ContactInformation.Business.Tests\SSTTEK.ContactInformation.Business.Tests.csproj", "{F4CB3EEB-AE8B-4F5F-8CBD-AE38750FE053}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.ContactInformation.DataAccess.Tests", "Services\ContactInformation\SSTTEK.ContactInformation.DataAccess.Tests\SSTTEK.ContactInformation.DataAccess.Tests.csproj", "{A07EC730-677E-4662-9C7A-127045337C5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -217,6 +229,30 @@ Global
 		{3C9B6420-86AD-49D4-82D5-CC179CCFF9EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C9B6420-86AD-49D4-82D5-CC179CCFF9EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C9B6420-86AD-49D4-82D5-CC179CCFF9EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{512D3DE3-E4F4-4FD5-B341-0E14D6F2D256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{512D3DE3-E4F4-4FD5-B341-0E14D6F2D256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{512D3DE3-E4F4-4FD5-B341-0E14D6F2D256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{512D3DE3-E4F4-4FD5-B341-0E14D6F2D256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A69E678-B6C6-46FB-B5DF-DF41D6E63187}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A69E678-B6C6-46FB-B5DF-DF41D6E63187}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A69E678-B6C6-46FB-B5DF-DF41D6E63187}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A69E678-B6C6-46FB-B5DF-DF41D6E63187}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BB9178E-A747-44D1-9B3B-F94B7F6855A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BB9178E-A747-44D1-9B3B-F94B7F6855A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BB9178E-A747-44D1-9B3B-F94B7F6855A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BB9178E-A747-44D1-9B3B-F94B7F6855A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EB2AD9C-82DE-4AF4-9801-AD9E219A2F3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EB2AD9C-82DE-4AF4-9801-AD9E219A2F3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EB2AD9C-82DE-4AF4-9801-AD9E219A2F3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EB2AD9C-82DE-4AF4-9801-AD9E219A2F3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4CB3EEB-AE8B-4F5F-8CBD-AE38750FE053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4CB3EEB-AE8B-4F5F-8CBD-AE38750FE053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4CB3EEB-AE8B-4F5F-8CBD-AE38750FE053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4CB3EEB-AE8B-4F5F-8CBD-AE38750FE053}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A07EC730-677E-4662-9C7A-127045337C5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A07EC730-677E-4662-9C7A-127045337C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A07EC730-677E-4662-9C7A-127045337C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A07EC730-677E-4662-9C7A-127045337C5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -263,6 +299,12 @@ Global
 		{1D2EF38C-68C8-456B-A573-8BCF3D569EF5} = {11C35C41-FB26-4D58-87F5-D483E7DAC81C}
 		{E1D0B57C-714F-4AFB-B005-4359BA42D7FE} = {11C35C41-FB26-4D58-87F5-D483E7DAC81C}
 		{3C9B6420-86AD-49D4-82D5-CC179CCFF9EC} = {11C35C41-FB26-4D58-87F5-D483E7DAC81C}
+		{512D3DE3-E4F4-4FD5-B341-0E14D6F2D256} = {8094BAD3-7991-4F1A-A59F-23E28A5B09C6}
+		{8A69E678-B6C6-46FB-B5DF-DF41D6E63187} = {8094BAD3-7991-4F1A-A59F-23E28A5B09C6}
+		{0BB9178E-A747-44D1-9B3B-F94B7F6855A8} = {8094BAD3-7991-4F1A-A59F-23E28A5B09C6}
+		{4EB2AD9C-82DE-4AF4-9801-AD9E219A2F3E} = {8094BAD3-7991-4F1A-A59F-23E28A5B09C6}
+		{F4CB3EEB-AE8B-4F5F-8CBD-AE38750FE053} = {8094BAD3-7991-4F1A-A59F-23E28A5B09C6}
+		{A07EC730-677E-4662-9C7A-127045337C5B} = {8094BAD3-7991-4F1A-A59F-23E28A5B09C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {933ABDA7-FF88-4E51-BBAE-690E0B356FAB}

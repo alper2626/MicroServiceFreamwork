@@ -4,19 +4,19 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:48713",
-      "sslPort": 44373
+      "applicationUrl": "http://localhost:11358",
+      "sslPort": 44315
     }
   },
   "profiles": {
-    "SSTTEK.ContactInformationsApi": {
+    "SSTTEK.ContactInformation.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:7221;http://localhost:5221",
+      "applicationUrl": "https://localhost:7048;http://localhost:5048",
       "dotnetRunMessages": true
     },
     "IIS Express": {

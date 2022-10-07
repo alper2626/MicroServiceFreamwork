@@ -1,5 +1,7 @@
-﻿using EntityBase.Concrete;
+﻿using AutoMapper;
+using EntityBase.Concrete;
 using SSTTEK.Contacts.Entities.Enum;
+using SSTTEK.Contacts.Entities.Poco.ContactInformationDto;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSTTEK.Contacts.Entities.Db
@@ -16,5 +18,20 @@ namespace SSTTEK.Contacts.Entities.Db
         public string Content { get; set; }
 
         public string ContentIndex { get; set; }
+
+        public bool IsRemoved { get; set; }
+    }
+
+    public class ContactInformationEntityProfile : Profile
+    {
+        public ContactInformationEntityProfile()
+        {
+            CreateMap<ContactInformationEntity, ContactInformationResponse>();
+
+            CreateMap<ContactInformationResponse, ContactInformationEntity>()
+                .ForMember(w => w.IsRemoved, q => q.Ignore());
+
+            CreateMap<ContactInformationEntity, CreateContactInformationRequest>().ReverseMap();
+        }
     }
 }

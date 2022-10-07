@@ -12,7 +12,8 @@ namespace SSTTEK.Contacts.Entities.Poco.ContactInformationDto
 
         public string Content { get; set; }
 
-        public string ContentIndex { get; set; }
+        [JsonIgnore]
+        public string ContentIndex => Content.ToLower();
 
         [JsonIgnore]
         public bool IsRemoved => false;

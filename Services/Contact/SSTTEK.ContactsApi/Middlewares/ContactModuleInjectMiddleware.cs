@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ServerBaseContract;
+using SSTTEK.Contact.Business.Concrete;
+using SSTTEK.Contact.Business.Contract;
+using SSTTEK.Contact.DataAccess.Concrete;
 using SSTTEK.Contact.DataAccess.Context;
+using SSTTEK.Contact.DataAccess.Contract;
 
 namespace SSTTEK.Contact.Api.Middlewares
 {
@@ -17,6 +21,9 @@ namespace SSTTEK.Contact.Api.Middlewares
                     context.Database.Migrate();
                 }
             }
+
+            services.AddScoped<IContactService, ContactManager>();
+            services.AddScoped<IContactDal, ContactDal>();
 
             return services;
         }

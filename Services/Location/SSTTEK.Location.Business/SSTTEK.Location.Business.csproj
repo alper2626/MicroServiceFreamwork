@@ -12,10 +12,5 @@
     <ProjectReference Include="..\..\..\Common\AdaptersAndMiddlewares\FluentValidationAdapter\FluentValidationAdapter.csproj" />
     <ProjectReference Include="..\SSTTEK.Location.DataAccess\SSTTEK.Location.DataAccess.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Concrete\" />
-    <Folder Include="Contract\" />
-  </ItemGroup>
   
 </Project>

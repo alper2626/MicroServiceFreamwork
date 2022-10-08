@@ -13,9 +13,4 @@
     <ProjectReference Include="..\SSTTEK.Contact.DataAccess\SSTTEK.Contact.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Concrete\" />
-    <Folder Include="Contract\" />
-  </ItemGroup>
-
 </Project>

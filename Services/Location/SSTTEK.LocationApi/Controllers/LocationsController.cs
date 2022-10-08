@@ -2,6 +2,7 @@
 using EntityBase.Poco.Responses;
 using Microsoft.AspNetCore.Mvc;
 using RestHelpers.Controllers;
+using SSTTEK.Location.Business.Contracts;
 using SSTTEK.Location.Entities.Poco.Location;
 
 namespace SSTTEK.Location.Api.Controllers
@@ -10,28 +11,35 @@ namespace SSTTEK.Location.Api.Controllers
     [ApiController]
     public class LocationsController : ApiControllerBase
     {
-        [HttpPost("create")]
-        public IActionResult Create(CreateLocationRequest request)
+        ILocationService _locationService;
+
+        public LocationsController(ILocationService locationService)
         {
-            return CreateActionResult(Response<CreateLocationRequest>.Fail("Metot Not Implemented", 400));
+            _locationService = locationService;
+        }
+
+        [HttpPost("create")]
+        public async Task<IActionResult> Create(CreateLocationRequest request)
+        {
+            return CreateActionResult(await _locationService.Create(request));
         }
 
         [HttpPut("update")]
-        public IActionResult Update(UpdateLocationRequest request)
+        public async Task<IActionResult> Update(UpdateLocationRequest request)
         {
-            return CreateActionResult(Response<UpdateLocationRequest>.Fail("Metot Not Implemented", 400));
+            return CreateActionResult(await _locationService.Update(request));
         }
 
         [HttpGet("get")]
-        public IActionResult Get(FilterModel request)
+        public async Task<IActionResult> Get(FilterModel request)
         {
-            return CreateActionResult(Response<FilterModel>.Fail("Metot Not Implemented", 400));
+            return CreateActionResult(await _locationService.Get(request));
         }
 
         [HttpDelete("delete")]
-        public IActionResult Delete(FilterModel request)
+        public async Task<IActionResult> Delete(FilterModel request)
         {
-            return CreateActionResult(Response<FilterModel>.Fail("Metot Not Implemented", 400));
+            return CreateActionResult(await _locationService.Delete(request));
         }
     }
 }

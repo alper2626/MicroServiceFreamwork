@@ -2,6 +2,7 @@
 using EntityBase.Poco.Responses;
 using Microsoft.AspNetCore.Mvc;
 using RestHelpers.Controllers;
+using SSTTEK.Contact.Business.Contract;
 using SSTTEK.Contact.Entities.Poco.ContactDto;
 
 namespace SSTTEK.Contact.Api.Controllers
@@ -9,34 +10,47 @@ namespace SSTTEK.Contact.Api.Controllers
     [Route("api/[controller]")]
     public class ContactsController : ApiControllerBase
     {
-        [HttpPost("create")]
-        public IActionResult Create(CreateContactRequest request)
+        IContactService _contactService;
+
+        public ContactsController(IContactService contactService)
         {
-            return CreateActionResult(Response<CreateContactRequest>.Fail("Metot Not Implemented", 400));
+            _contactService = contactService;
+        }
+
+        [HttpPost("create")]
+        public async Task<IActionResult> Create(CreateContactRequest request)
+        {
+            return CreateActionResult(await _contactService.Create(request));
         }
 
         [HttpPut("update")]
-        public IActionResult Update(UpdateContactRequest request)
+        public async Task<IActionResult> Update(UpdateContactRequest request)
         {
-            return CreateActionResult(Response<UpdateContactRequest>.Fail("Metot Not Implemented", 400));
+            return CreateActionResult(await _contactService.Update(request));
         }
 
         [HttpPut("remove")]
-        public IActionResult Remove(FilterModel model)
+        public async Task<IActionResult> Remove(FilterModel request)
         {
-            return CreateActionResult(Response<FilterModel>.Fail("Metot Not Implemented", 400));
+            return CreateActionResult(await _contactService.Remove(request));
         }
 
         [HttpGet("get")]
-        public IActionResult Get(FilterModel request)
+        public async Task<IActionResult> Get(FilterModel request)
         {
-            return CreateActionResult(Response<FilterModel>.Fail("Metot Not Implemented", 400));
+            return CreateActionResult(await _contactService.Get(request));
+        }
+
+        [HttpGet("getwithdetail")]
+        public async Task<IActionResult> GetWithDetail(FilterModel request)
+        {
+            return CreateActionResult(await _contactService.GetWithDetail(request));
         }
 
         [HttpDelete("delete")]
-        public IActionResult Delete(FilterModel request)
+        public async Task<IActionResult> Delete(FilterModel request)
         {
-            return CreateActionResult(Response<FilterModel>.Fail("Metot Not Implemented", 400));
+            return CreateActionResult(await _contactService.Delete(request));
         }
     }
 }

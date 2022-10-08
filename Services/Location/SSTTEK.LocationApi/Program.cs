@@ -13,6 +13,7 @@ using RedisCacheService.Middleware;
 using RedisCacheService.Models;
 using RestHelpers.DIHelpers;
 using ServerBaseContract;
+using SSTTEK.Location.Api.Middlewares;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -118,6 +119,7 @@ builder.Services.AddSwaggerGen();
 /// </summary>
 var services = ServiceTool.Create(builder.Services);
 
+services.InjectLocation();
 
 var app = builder.Build();
 

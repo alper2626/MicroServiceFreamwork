@@ -29,10 +29,16 @@ namespace SSTTEK.Location.Api.Controllers
             return CreateActionResult(await _locationService.Update(request));
         }
 
-        [HttpGet("get")]
+        [HttpPost("get")]
         public async Task<IActionResult> Get(FilterModel request)
         {
             return CreateActionResult(await _locationService.Get(request));
+        }
+
+        [HttpPost("list")]
+        public async Task<IActionResult> List(FilterModel request)
+        {
+            return CreateActionResult(await _locationService.GetList(request));
         }
 
         [HttpDelete("delete")]

@@ -35,19 +35,25 @@ namespace SSTTEK.Contact.Api.Controllers
             return CreateActionResult(await _contactService.Remove(request));
         }
 
-        [HttpGet("get")]
+        [HttpPost("get")]
         public async Task<IActionResult> Get(FilterModel request)
         {
             return CreateActionResult(await _contactService.Get(request));
         }
 
-        [HttpGet("getwithdetail")]
+        [HttpPost("list")]
+        public async Task<IActionResult> List(FilterModel request)
+        {
+            return CreateActionResult(await _contactService.GetList(request));
+        }
+
+        [HttpPost("getwithdetail")]
         public async Task<IActionResult> GetWithDetail(FilterModel request)
         {
             return CreateActionResult(await _contactService.GetWithDetail(request));
         }
 
-        [HttpDelete("delete")]
+        [HttpPost("delete")]
         public async Task<IActionResult> Delete(FilterModel request)
         {
             return CreateActionResult(await _contactService.Delete(request));

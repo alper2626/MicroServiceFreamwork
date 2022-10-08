@@ -28,10 +28,16 @@ namespace SSTTEK.ContactInformation.Api.Controllers
             return CreateActionResult(await _contactInformationService.Remove(request));
         }
 
-        [HttpGet("get")]
+        [HttpPost("get")]
         public async Task<IActionResult> Get(FilterModel request)
         {
             return CreateActionResult(await _contactInformationService.Get(request));
+        }
+
+        [HttpPost("list")]
+        public async Task<IActionResult> List(FilterModel request)
+        {
+            return CreateActionResult(await _contactInformationService.GetList(request));
         }
 
     }

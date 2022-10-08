@@ -1,0 +1,2 @@
+Bu Consumer LocationModifiedEvent eventini yakalayýp. Kendi veritabanýnda bu isme sahip location var ise update ederek eventual consistency saðlar.
+Bu Consumer CreateContactInformationCommand commandýný yakalayarak ilgili tabloya veri yazar.

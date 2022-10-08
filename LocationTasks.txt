@@ -1,0 +1,1 @@
+Bu servis location üzerinde bir deðiþiklik yapýldýðýnda event location bilgisini event olarak fýrlatýr. (SSTTEK.MassTransitCommon --> LocationModifiedEvent)

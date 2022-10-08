@@ -108,6 +108,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TaskList.txt = TaskList.txt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Amqp", "Amqp", "{2B67C0ED-1164-4B50-8558-A94C52F66AE0}"
+	ProjectSection(SolutionItems) = preProject
+		ContactInformationTask.txt = ContactInformationTask.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Amqp", "Amqp", "{472AF711-B723-45AA-BEF1-4625506F6644}"
+	ProjectSection(SolutionItems) = preProject
+		ContactTask.txt = ContactTask.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Amqp", "Amqp", "{6FFF9190-4C67-43A8-8068-64A574412C5B}"
+	ProjectSection(SolutionItems) = preProject
+		LocationTasks.txt = LocationTasks.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.Contact.AmqpService", "Services\Contact\Amqp\SSTTEK.Contact.AmqpService\SSTTEK.Contact.AmqpService.csproj", "{4C134D98-E1F5-462F-A058-ED1E6C60E0F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.ContactInformation.Consumer", "Services\ContactInformation\Amqp\SSTTEK.ContactInformation.Consumer\SSTTEK.ContactInformation.Consumer.csproj", "{8A2D37B5-F51B-41A6-923E-9BE025DCC94A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.Location.AmqpService", "Services\Location\Amqp\SSTTEK.Location.AmqpService\SSTTEK.Location.AmqpService.csproj", "{F4CDE280-83F6-4720-9835-E7410020D2A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -258,6 +279,18 @@ Global
 		{A07EC730-677E-4662-9C7A-127045337C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A07EC730-677E-4662-9C7A-127045337C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A07EC730-677E-4662-9C7A-127045337C5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C134D98-E1F5-462F-A058-ED1E6C60E0F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C134D98-E1F5-462F-A058-ED1E6C60E0F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C134D98-E1F5-462F-A058-ED1E6C60E0F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C134D98-E1F5-462F-A058-ED1E6C60E0F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A2D37B5-F51B-41A6-923E-9BE025DCC94A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A2D37B5-F51B-41A6-923E-9BE025DCC94A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A2D37B5-F51B-41A6-923E-9BE025DCC94A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A2D37B5-F51B-41A6-923E-9BE025DCC94A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4CDE280-83F6-4720-9835-E7410020D2A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4CDE280-83F6-4720-9835-E7410020D2A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4CDE280-83F6-4720-9835-E7410020D2A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4CDE280-83F6-4720-9835-E7410020D2A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -310,6 +343,12 @@ Global
 		{4EB2AD9C-82DE-4AF4-9801-AD9E219A2F3E} = {8094BAD3-7991-4F1A-A59F-23E28A5B09C6}
 		{F4CB3EEB-AE8B-4F5F-8CBD-AE38750FE053} = {8094BAD3-7991-4F1A-A59F-23E28A5B09C6}
 		{A07EC730-677E-4662-9C7A-127045337C5B} = {8094BAD3-7991-4F1A-A59F-23E28A5B09C6}
+		{2B67C0ED-1164-4B50-8558-A94C52F66AE0} = {8094BAD3-7991-4F1A-A59F-23E28A5B09C6}
+		{472AF711-B723-45AA-BEF1-4625506F6644} = {11C35C41-FB26-4D58-87F5-D483E7DAC81C}
+		{6FFF9190-4C67-43A8-8068-64A574412C5B} = {1D5C4345-E878-46C2-9FB1-219C728A5E47}
+		{4C134D98-E1F5-462F-A058-ED1E6C60E0F1} = {472AF711-B723-45AA-BEF1-4625506F6644}
+		{8A2D37B5-F51B-41A6-923E-9BE025DCC94A} = {2B67C0ED-1164-4B50-8558-A94C52F66AE0}
+		{F4CDE280-83F6-4720-9835-E7410020D2A1} = {6FFF9190-4C67-43A8-8068-64A574412C5B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {933ABDA7-FF88-4E51-BBAE-690E0B356FAB}

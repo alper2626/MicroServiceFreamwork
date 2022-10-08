@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Xunit.Microsoft.DependencyInjection;
 using RedisCacheService.Models;
+using AmqpBase.Model;
 
 namespace SSTTEK.Location.DataAccess.Tests
 {
@@ -39,6 +40,21 @@ namespace SSTTEK.Location.DataAccess.Tests
             {
                 return sp.GetRequiredService<IOptions<RedisOptions>>().Value;
             });
+            #endregion
+
+
+            #region RabbitMqConfigurations
+
+            services.Configure<RabbitMqOptions>(options =>
+            {
+                configuration.GetSection("RabbitMq").Bind(options);
+            });
+            services.AddScoped<RabbitMqOptions>(sp =>
+            {
+                return sp.GetRequiredService<IOptions<RabbitMqOptions>>().Value;
+            });
+
+
             #endregion
 
         }

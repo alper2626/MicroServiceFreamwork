@@ -1,13 +1,15 @@
-﻿using AutoMapperAdapter;
+﻿using AutoMapperAdapter; 
 using EntityBase.Concrete;
 using EntityBase.Enum;
 using EntityBase.Poco.Responses;
 using RestHelpers.Constacts;
 using ServerBaseContract.Repository.Abstract;
+using SSTTEK.Location.AmqpService.Publisher.Location;
 using SSTTEK.Location.Business.Contracts;
 using SSTTEK.Location.DataAccess.Contract;
 using SSTTEK.Location.Entities.Db;
 using SSTTEK.Location.Entities.Poco.Location;
+using SSTTEK.MassTransitCommon.Events;
 
 namespace SSTTEK.Location.Business.Concrete
 {
@@ -15,11 +17,13 @@ namespace SSTTEK.Location.Business.Concrete
     {
         ILocationDal _locationDal;
         IQueryableRepositoryBase<LocationEntity> _queryableRepositoryBase;
+        ILocationPublisher _locationPublisher;
 
-        public LocationManager(ILocationDal locationDal, IQueryableRepositoryBase<LocationEntity> queryableRepositoryBase)
+        public LocationManager(ILocationDal locationDal, IQueryableRepositoryBase<LocationEntity> queryableRepositoryBase, ILocationPublisher locationPublisher)
         {
             _locationDal = locationDal;
             _queryableRepositoryBase = queryableRepositoryBase;
+            _locationPublisher = locationPublisher;
         }
 
         public async Task<Response<CreateLocationRequest>> Create(CreateLocationRequest request)
@@ -67,11 +71,30 @@ namespace SSTTEK.Location.Business.Concrete
 
         public async Task<Response<UpdateLocationRequest>> Update(UpdateLocationRequest request)
         {
+            //Not : ContactInformation da mail telefon konum gibi farklı bilgiler tutulduğu için LocationId bilgisini yazamadım.
+            //Bu yüzden ContactInformation Modulde Content alanına index attım eski ismi ile sorgulatıp update edeceğim.
+            var data = await this.Get(FilterModel.Get(nameof(LocationEntity.Id), FilterOperator.Equals, request.Id));
+            if (!data.IsSuccessful)
+            {
+                return data.FailConvert<UpdateLocationRequest>();
+            }
+
             var res = _locationDal.SetState(AutoMapperWrapper.Mapper.Map<UpdateLocationRequest, LocationEntity>(request), OperationType.Update);
             if (res == null)
             {
                 return Response<UpdateLocationRequest>.Fail(CommonMessage.ServerError, 500);
             }
+
+            var @event = new LocationModifiedEvent
+            {
+                EventOwner = "Location Manager -->  Update",
+                EventCreatedTime = DateTime.Now,
+                NewName = request.Name,
+                OldName = data.Data.Name.ToLower()
+            };
+
+            await _locationPublisher.PublishLocationModifiedEvent(@event);
+
             return Response<UpdateLocationRequest>.Success(CommonMessage.Success, 201);
         }
     }

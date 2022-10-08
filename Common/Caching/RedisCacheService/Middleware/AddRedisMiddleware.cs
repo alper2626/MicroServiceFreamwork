@@ -8,7 +8,7 @@ namespace RedisCacheService.Middleware
 {
     public static class AddRedisMiddleware
     {
-        public static IServiceCollection AddEsterRedis(this IServiceCollection services, RedisOptions opt)
+        public static IServiceCollection AddRedis(this IServiceCollection services, RedisOptions opt)
         {
             services.AddSingleton<RedisOptions>(sp =>
             {

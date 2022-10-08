@@ -4,12 +4,14 @@ using EntityBase.Enum;
 using EntityBase.Poco.Responses;
 using RestHelpers.Constacts;
 using ServerBaseContract.Repository.Abstract;
+using SSTTEK.Contact.AmqpService.Sender.ContactInformation;
 using SSTTEK.Contact.Business.Contract;
 using SSTTEK.Contact.Business.HttpClients;
 using SSTTEK.Contact.DataAccess.Contract;
 using SSTTEK.Contact.Entities.Db;
 using SSTTEK.Contact.Entities.Poco.ContactDto;
 using SSTTEK.Contact.Entities.Poco.ContactInformationDto;
+using SSTTEK.MassTransitCommon.Commands;
 
 namespace SSTTEK.Contact.Business.Concrete
 {
@@ -18,6 +20,7 @@ namespace SSTTEK.Contact.Business.Concrete
         IContactDal _contactDal;
         IQueryableRepositoryBase<ContactEntity> _queryableRepositoryBase;
         IContactInformationClient _contactInformationClient;
+        IContactInformationSender _contactInformationSender;
 
         public ContactManager(IContactDal contactDal, IQueryableRepositoryBase<ContactEntity> queryableRepositoryBase, IContactInformationClient contactInformationClient)
         {
@@ -29,10 +32,20 @@ namespace SSTTEK.Contact.Business.Concrete
         public async Task<Response<CreateContactRequest>> Create(CreateContactRequest request)
         {
             var res = _contactDal.SetState(AutoMapperWrapper.Mapper.Map<CreateContactRequest, ContactEntity>(request), OperationType.Create);
-            if(res == null)
+            if (res == null)
             {
                 return Response<CreateContactRequest>.Fail(CommonMessage.ServerError, 500);
             }
+            var command = new CreateContactInformationCommandWrapper
+            {
+                Items = AutoMapperWrapper.Mapper.Map<List<CreateContactInformationCommand>>(request.ContactInformations)
+            };
+            command.Items.ForEach(item =>
+            {
+                item.EventCreatedTime = DateTime.Now;
+                item.EventOwner = "ContactManager --> Create";
+            });
+            await _contactInformationSender.PublishContactInformations(command);
             return Response<CreateContactRequest>.Success(CommonMessage.Success, 200);
         }
 
@@ -40,7 +53,7 @@ namespace SSTTEK.Contact.Business.Concrete
         {
             var res = await _queryableRepositoryBase.List<ContactResponse>(request);
             var entities = AutoMapperWrapper.Mapper.Map<List<ContactEntity>>(res.Items);
-            if(_contactDal.SetState(entities, OperationType.Delete) == null)
+            if (_contactDal.SetState(entities, OperationType.Delete) == null)
             {
                 return Response<IEnumerable<ContactResponse>>.Fail(CommonMessage.ServerError, 500);
             }
@@ -50,7 +63,7 @@ namespace SSTTEK.Contact.Business.Concrete
         public async Task<Response<IEnumerable<ContactResponse>>> GetList(FilterModel request)
         {
             var res = await _queryableRepositoryBase.List<ContactResponse>(request);
-            
+
             if (res == null || !res.Items.Any())
             {
                 return Response<IEnumerable<ContactResponse>>.Fail(CommonMessage.NotFound, 404);
@@ -86,7 +99,7 @@ namespace SSTTEK.Contact.Business.Concrete
 
             res.Informations = httpRes.Data;
             return Response<ContactDetailedResponse>.Success(res, 201);
-            
+
         }
 
         public async Task<Response<IEnumerable<ContactResponse>>> Remove(FilterModel request)

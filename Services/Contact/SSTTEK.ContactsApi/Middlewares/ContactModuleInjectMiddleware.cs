@@ -2,6 +2,7 @@
 using MsSqlAdapter.Repository;
 using ServerBaseContract;
 using ServerBaseContract.Repository.Abstract;
+using SSTTEK.Contact.AmqpService.Sender.ContactInformation;
 using SSTTEK.Contact.Business.Concrete;
 using SSTTEK.Contact.Business.Contract;
 using SSTTEK.Contact.DataAccess.Concrete;
@@ -27,7 +28,8 @@ namespace SSTTEK.Contact.Api.Middlewares
             services.AddScoped<IContactService, ContactManager>();
             services.AddScoped<IContactDal, ContactDal>();
             services.AddScoped(typeof(IQueryableRepositoryBase<>),typeof(MsSqlQueryableRepositoryBase<>));
-
+            services.AddScoped<IContactInformationSender, ContactInformationSender>();
+            
             return services;
         }
 

@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\CastleInterceptors\CastleInterceptors.csproj" />
     <ProjectReference Include="..\..\..\CommonMiddlewares\CommonMiddlewares.csproj" />
+    <ProjectReference Include="..\Amqp\SSTTEK.Location.AmqpService\SSTTEK.Location.AmqpService.csproj" />
     <ProjectReference Include="..\SSTTEK.Location.Business\SSTTEK.Location.Business.csproj" />
   </ItemGroup>
 

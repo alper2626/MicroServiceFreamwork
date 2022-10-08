@@ -1,5 +1,4 @@
 ﻿using EntityBase.Abstract;
-using EsterOfis.EntityBase.Abstract;
 using System.Linq.Expressions;
 
 namespace ServerBaseContract.Repository.Abstract

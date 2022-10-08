@@ -94,7 +94,7 @@ builder.Services.AddRabbitMqModules(
 
 #region Add Redis
 
-builder.Services.AddEsterRedis(new RedisOptions
+builder.Services.AddRedis(new RedisOptions
 {
     Host = builder.Configuration["RedisOptions:Host"],
     Port = builder.Configuration["RedisOptions:Port"],

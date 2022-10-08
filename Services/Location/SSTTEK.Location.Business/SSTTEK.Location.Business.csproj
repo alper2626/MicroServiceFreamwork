@@ -10,6 +10,7 @@
     <ProjectReference Include="..\..\..\AmqpBase\AmqpBase.csproj" />
     <ProjectReference Include="..\..\..\CastleInterceptors\CastleInterceptors.csproj" />
     <ProjectReference Include="..\..\..\Common\AdaptersAndMiddlewares\FluentValidationAdapter\FluentValidationAdapter.csproj" />
+    <ProjectReference Include="..\Amqp\SSTTEK.Location.AmqpService\SSTTEK.Location.AmqpService.csproj" />
     <ProjectReference Include="..\SSTTEK.Location.DataAccess\SSTTEK.Location.DataAccess.csproj" />
   </ItemGroup>
   

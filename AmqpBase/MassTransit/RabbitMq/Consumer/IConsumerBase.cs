@@ -18,7 +18,6 @@ namespace AmqpBase.MassTransit.RabbitMq.Consumer
 
 
         //Şimdilik bir iş yapılmıyor her comsume için bir işlem yapmamız gerekirse diye dursun.
-        //Tüm consumerlar bir ester consumerdir.
         public virtual Task Consume<T>(ConsumeContext<T> context)
         where T : class, new()
         {

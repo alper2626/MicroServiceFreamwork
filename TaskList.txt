@@ -1,7 +1,7 @@
 --Business logic metotlarý yazýlacak.
 --Api tarafýnda bussines metot çaðýrýmlarý yapýlacak.
-Contact kayýt edildikten sonra Contact Information için event fýrlatýlacak.
-Location Adý deðiþtiðinde eventual consistency saðlanmasý için event fýrlatýlýp Contact Information da yakalanýp update atýlacak.
+--Contact kayýt edildikten sonra Contact Information için event fýrlatýlacak.
+--Location Adý deðiþtiðinde eventual consistency saðlanmasý için event fýrlatýlýp Contact Information da yakalanýp update atýlacak.
 Business logic unit testleri yazýlacak.
 
 VAKIT OLURSA YAPILACAKLAR

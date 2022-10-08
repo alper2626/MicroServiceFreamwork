@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\AmqpBase\AmqpBase.csproj" />
     <ProjectReference Include="..\..\..\CommonMiddlewares\CommonMiddlewares.csproj" />
     <ProjectReference Include="..\..\..\Common\Core\DbContracts\ServerBaseContract\ServerBaseContract.csproj" />
     <ProjectReference Include="..\..\..\Test\TestBase\TestBase.csproj" />

@@ -1,0 +1,20 @@
+
+services:
+
+  rabbitmq:
+   container_name: phonebookrabbitmq
+   image: rabbitmq:latest
+   ports:
+    - 5672:5672
+    - 15672:15672
+   environment:
+    - RABBITMQ_DEFAULT_USER=abasda
+    - RABBITMQ_DEFAULT_PASS=Neslican26*-
+   volumes:
+    - rabbitmq-data:/usr/share/rabbitmq/data
+networks:
+  elastic:
+    driver: bridge
+
+volumes:
+  rabbitmq-data:

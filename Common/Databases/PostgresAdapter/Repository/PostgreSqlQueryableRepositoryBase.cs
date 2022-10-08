@@ -1,7 +1,7 @@
 ﻿using AutoMapperAdapter;
 using EntityBase.Abstract;
-using EsterOfis.EntityBase.Abstract;
-using EsterOfis.EntityBase.Concrete;
+using EntityBase.Abstract;
+using EntityBase.Concrete;
 using Microsoft.EntityFrameworkCore;
 using RestHelpers.DIHelpers;
 using ServerBaseContract.Repository.Abstract;

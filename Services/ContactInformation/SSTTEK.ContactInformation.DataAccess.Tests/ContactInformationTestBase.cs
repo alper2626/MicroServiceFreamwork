@@ -1,4 +1,5 @@
-﻿using CommonMiddlewares;
+﻿using AmqpBase.Model;
+using CommonMiddlewares;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,20 @@ namespace SSTTEK.ContactInformation.DataAccess.Tests
             {
                 return sp.GetRequiredService<IOptions<DatabaseOptions>>().Value;
             });
+            #endregion
+
+            #region RabbitMqConfigurations
+
+            services.Configure<RabbitMqOptions>(options =>
+            {
+                configuration.GetSection("RabbitMq").Bind(options);
+            });
+            services.AddScoped<RabbitMqOptions>(sp =>
+            {
+                return sp.GetRequiredService<IOptions<RabbitMqOptions>>().Value;
+            });
+
+
             #endregion
 
             services.AddTransient<DbContext, ContactInformationModuleContext>();

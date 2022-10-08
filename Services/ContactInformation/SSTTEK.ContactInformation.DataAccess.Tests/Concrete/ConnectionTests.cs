@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AmqpBase.Model;
+using Microsoft.EntityFrameworkCore;
+using RabbitMQ.Client;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -27,6 +29,27 @@ namespace SSTTEK.ContactInformation.DataAccess.Tests.Concrete
              });
 
             Assert.True(connectable);
+        }
+
+        [Fact]
+        public void ConnectToRabbitMq()
+        {
+            var options = GetScopedService<RabbitMqOptions>(_testOutputHelper);
+
+            var exception = Record.Exception(() =>
+            {
+
+                var factory = new ConnectionFactory
+                {
+                    HostName = options.Host,
+                    UserName = options.UserName,
+                    Password = options.Password
+                };
+                var connection = factory.CreateConnection();
+                connection.Dispose();
+            });
+            Assert.Null(exception);
+
         }
     }
 }

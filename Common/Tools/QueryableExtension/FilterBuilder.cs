@@ -1,7 +1,7 @@
 ﻿using AutoMapperAdapter;
 using EntityBase.Abstract;
 using EntityBase.Concrete;
-using EsterOfis.EntityBase.Concrete;
+using EntityBase.Concrete;
 using Tools.ExpressionBuilder;
 
 namespace Tools.QueryableExtension

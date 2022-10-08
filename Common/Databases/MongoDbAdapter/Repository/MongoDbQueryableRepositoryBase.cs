@@ -1,7 +1,6 @@
 ﻿using AutoMapperAdapter;
 using EntityBase.Abstract;
-using EsterOfis.EntityBase.Abstract;
-using EsterOfis.EntityBase.Concrete;
+using EntityBase.Concrete;
 using MongoDB.Driver;
 using MongoDbExtender.Models;
 using ServerBaseContract;

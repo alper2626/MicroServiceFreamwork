@@ -6,6 +6,7 @@ namespace AmqpBase.Extensions
     {
         public static IEnumerable<Type> Find()
         {
+            //Proje cok büyük değilse mantıklı büyüdüğü durumlarda direk asmyi vermek daha mantıklı olacaktır.
             List<Type> types = new List<Type>();
             foreach (Type type in
                 AppDomain.CurrentDomain.GetAssemblies()

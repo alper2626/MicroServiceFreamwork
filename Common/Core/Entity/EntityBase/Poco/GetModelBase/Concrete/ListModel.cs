@@ -1,5 +1,5 @@
-﻿using EsterOfis.EntityBase.Abstract;
-namespace EsterOfis.EntityBase.Concrete
+﻿using EntityBase.Abstract;
+namespace EntityBase.Concrete
 {
     /// <summary>
     /// Liste sayfalarında kullanılan her model IListModel veya bu arayüzü miras alan bir modelden kalıtılmalıdır.

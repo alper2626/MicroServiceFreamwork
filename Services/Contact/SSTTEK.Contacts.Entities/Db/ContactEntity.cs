@@ -19,6 +19,9 @@ namespace SSTTEK.Contact.Entities.Db
         {
             CreateMap<ContactEntity, ContactResponse>();
 
+            CreateMap<ContactEntity, ContactDetailedResponse>()
+                .ForMember(w => w.Informations, q => q.Ignore());
+
             CreateMap<ContactResponse, ContactEntity>()
                 .ForMember(w => w.IsRemoved, q => q.Ignore());
 

@@ -14,7 +14,7 @@ namespace SSTTEK.Contact.Business.Contract
 
         Task<Response<IEnumerable<ContactResponse>>> GetList(FilterModel request);
 
-        Task<Response<IEnumerable<ContactDetailedResponse>>> GetWithDetail(FilterModel request);
+        Task<Response<ContactDetailedResponse>> GetWithDetail(FilterModel request);
 
         Task<Response<IEnumerable<ContactResponse>>> Remove(FilterModel request);
 

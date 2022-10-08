@@ -27,7 +27,6 @@ namespace SSTTEK.Contact.Api.Middlewares
             services.AddScoped<IContactService, ContactManager>();
             services.AddScoped<IContactDal, ContactDal>();
             services.AddScoped(typeof(IQueryableRepositoryBase<>),typeof(MsSqlQueryableRepositoryBase<>));
-            
 
             return services;
         }

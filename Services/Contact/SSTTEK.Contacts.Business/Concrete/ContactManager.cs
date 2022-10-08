@@ -5,9 +5,11 @@ using EntityBase.Poco.Responses;
 using RestHelpers.Constacts;
 using ServerBaseContract.Repository.Abstract;
 using SSTTEK.Contact.Business.Contract;
+using SSTTEK.Contact.Business.HttpClients;
 using SSTTEK.Contact.DataAccess.Contract;
 using SSTTEK.Contact.Entities.Db;
 using SSTTEK.Contact.Entities.Poco.ContactDto;
+using SSTTEK.Contact.Entities.Poco.ContactInformationDto;
 
 namespace SSTTEK.Contact.Business.Concrete
 {
@@ -15,11 +17,13 @@ namespace SSTTEK.Contact.Business.Concrete
     {
         IContactDal _contactDal;
         IQueryableRepositoryBase<ContactEntity> _queryableRepositoryBase;
+        IContactInformationClient _contactInformationClient;
 
-        public ContactManager(IContactDal contactDal, IQueryableRepositoryBase<ContactEntity> queryableRepositoryBase)
+        public ContactManager(IContactDal contactDal, IQueryableRepositoryBase<ContactEntity> queryableRepositoryBase, IContactInformationClient contactInformationClient)
         {
             _contactDal = contactDal;
             _queryableRepositoryBase = queryableRepositoryBase;
+            _contactInformationClient = contactInformationClient;
         }
 
         public async Task<Response<CreateContactRequest>> Create(CreateContactRequest request)
@@ -65,10 +69,24 @@ namespace SSTTEK.Contact.Business.Concrete
             return Response<ContactResponse>.Success(res, 201);
         }
 
-        public async Task<Response<IEnumerable<ContactDetailedResponse>>> GetWithDetail(FilterModel request)
+        public async Task<Response<ContactDetailedResponse>> GetWithDetail(FilterModel request)
         {
-            //TODO: Alper Api Request Atılacak sona bırak.
-            throw new NotImplementedException();
+            var res = await _queryableRepositoryBase.FirstOrDefault<ContactDetailedResponse>(request);
+
+            if (res == null)
+            {
+                return Response<ContactDetailedResponse>.Fail(CommonMessage.NotFound, 404);
+            }
+
+            var httpRes = await _contactInformationClient.ListContactInformationAsync(FilterModel.Get(nameof(ContactInformationResponse.ContactEntityId), FilterOperator.Equals, res.Id));
+            if (!httpRes.IsSuccessful)
+            {
+                return httpRes.FailConvert<ContactDetailedResponse>();
+            }
+
+            res.Informations = httpRes.Data;
+            return Response<ContactDetailedResponse>.Success(res, 201);
+            
         }
 
         public async Task<Response<IEnumerable<ContactResponse>>> Remove(FilterModel request)

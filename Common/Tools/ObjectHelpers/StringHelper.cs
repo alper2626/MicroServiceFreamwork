@@ -1,4 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
+using System.Text.Json;
+using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Tools.ObjectHelpers
 {
@@ -25,6 +28,14 @@ namespace Tools.ObjectHelpers
                 }
             }
             return false;
+        }
+
+        public static StringContent ToStringContent<T>(T obj)
+        {
+            return new StringContent(
+                         JsonSerializer.Serialize(obj),
+                         Encoding.UTF8,
+                         Application.Json);
         }
     }
 }

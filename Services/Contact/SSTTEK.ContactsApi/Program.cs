@@ -12,6 +12,8 @@ using Microsoft.Extensions.Options;
 using RestHelpers.DIHelpers;
 using ServerBaseContract;
 using SSTTEK.Contact.Api.Middlewares;
+using SSTTEK.Contact.Business.HttpClients;
+using SSTTEK.Contact.Business.HttpClients.Handler;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -100,10 +102,19 @@ AutoMapperWrapper.Configure();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+/// <summary>
+/// Module DI's Added.
+/// </summary>
 builder.Services.InjectContact(
     new DatabaseOptions {ConnectionString = builder.Configuration["DatabaseOptions:ConnectionString"],DatabaseName = builder.Configuration["DatabaseOptions:DatabaseName"] },
     Convert.ToBoolean(builder.Configuration["DatabaseChanged"]));
+
+/// <summary>
+/// HttpClients added.
+/// </summary>
+builder.Services.AddHttpClient<IContactInformationClient, ContactInformationClient>(c => c.BaseAddress = new System.Uri(builder.Configuration["HttpClients:ContactInformationClient"]))
+                .AddHttpMessageHandler<UpdateHeaderHandler>();
+
 
 /// <summary>
 /// Tüm Di lar enjecte oldu provider ý olustur. Ayný zamanda bu çaðýrýlmassa migration çalýþmaz.

@@ -10,8 +10,10 @@ namespace SSTTEK.Location.Business.Contracts
 
         Task<Response<UpdateLocationRequest>> Update(UpdateLocationRequest request);
 
+        Task<Response<IEnumerable<LocationResponse>>> GetList(FilterModel request);
+
         Task<Response<LocationResponse>> Get(FilterModel request);
 
-        Task<Response<LocationResponse>> Delete(FilterModel request);
+        Task<Response<IEnumerable<LocationResponse>>> Delete(FilterModel request);
     }
 }

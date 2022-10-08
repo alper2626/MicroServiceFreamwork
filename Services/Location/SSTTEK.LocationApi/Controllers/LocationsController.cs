@@ -1,5 +1,4 @@
 ﻿using EntityBase.Concrete;
-using EntityBase.Poco.Responses;
 using Microsoft.AspNetCore.Mvc;
 using RestHelpers.Controllers;
 using SSTTEK.Location.Business.Contracts;

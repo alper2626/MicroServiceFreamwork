@@ -8,8 +8,10 @@ namespace SSTTEK.ContactInformation.Business.Contracts
     {
         Task<Response<CreateContactInformationRequest>> Create(CreateContactInformationRequest request);
 
+        Task<Response<IEnumerable<ContactInformationResponse>>> GetList(FilterModel request);
+
         Task<Response<ContactInformationResponse>> Get(FilterModel request);
 
-        Task<Response<ContactInformationResponse>> Remove(FilterModel request);
+        Task<Response<IEnumerable<ContactInformationResponse>>> Remove(FilterModel request);
     }
 }

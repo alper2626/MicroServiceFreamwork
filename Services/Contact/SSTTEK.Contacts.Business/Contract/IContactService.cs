@@ -12,10 +12,12 @@ namespace SSTTEK.Contact.Business.Contract
 
         Task<Response<ContactResponse>> Get(FilterModel request);
 
-        Task<Response<ContactDetailedResponse>> GetWithDetail(FilterModel request);
+        Task<Response<IEnumerable<ContactResponse>>> GetList(FilterModel request);
 
-        Task<Response<ContactResponse>> Remove(FilterModel request);
+        Task<Response<IEnumerable<ContactDetailedResponse>>> GetWithDetail(FilterModel request);
 
-        Task<Response<ContactResponse>> Delete(FilterModel request);
+        Task<Response<IEnumerable<ContactResponse>>> Remove(FilterModel request);
+
+        Task<Response<IEnumerable<ContactResponse>>> Delete(FilterModel request);
     }
 }

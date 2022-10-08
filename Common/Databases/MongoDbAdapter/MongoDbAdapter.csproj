@@ -18,7 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\AdaptersAndMiddlewares\AutoMapperAdapter\AutoMapperAdapter.csproj" />
     <ProjectReference Include="..\..\Core\DbContracts\ServerBaseContract\ServerBaseContract.csproj" />
+    <ProjectReference Include="..\..\Tools\Tools.csproj" />
+    <ProjectReference Include="..\MongoDbExtender\MongoDbExtender.csproj" />
   </ItemGroup>
 
 </Project>

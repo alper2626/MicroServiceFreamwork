@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PostgresAdapter.Repository;
 using ServerBaseContract;
+using ServerBaseContract.Repository.Abstract;
 using SSTTEK.ContactInformation.Business.Concrete;
 using SSTTEK.ContactInformation.Business.Contracts;
 using SSTTEK.ContactInformation.DataAccess.Concrete;
@@ -26,6 +28,7 @@ namespace SSTTEK.ContactInformation.Api.Middlewares
             services.AddTransient<IContactInformationReportService, ContactInformationReportManager>();
 
             services.AddTransient<IContactInformationDal, ContactInformationDal>();
+            services.AddScoped(typeof(IQueryableRepositoryBase<>), typeof(PostgreSqlQueryableRepositoryBase<>));
 
             return services;
         }

@@ -1,4 +1,6 @@
-﻿using SSTTEK.Location.Business.Concrete;
+﻿using MongoDbAdapter.Repository;
+using ServerBaseContract.Repository.Abstract;
+using SSTTEK.Location.Business.Concrete;
 using SSTTEK.Location.Business.Contracts;
 using SSTTEK.Location.DataAccess.Concrete;
 using SSTTEK.Location.DataAccess.Contract;
@@ -12,6 +14,8 @@ namespace SSTTEK.Location.Api.Middlewares
             
             services.AddTransient<ILocationService, LocationManager>();
             services.AddTransient<ILocationDal, LocationDal>();
+
+            services.AddScoped(typeof(IQueryableRepositoryBase<>), typeof(MongoDbQueryableRepositoryBase<>));
 
             return services;
         }

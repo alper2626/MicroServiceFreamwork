@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using SSTTEK.Contact.Business.Constants;
+using RestHelpers.Constacts;
 using SSTTEK.Contact.Entities.Poco.ContactDto;
 namespace SSTTEK.Contact.Business.Validators.Contact
 {
@@ -7,9 +7,9 @@ namespace SSTTEK.Contact.Business.Validators.Contact
     {
         public UpdateContactRequestValidator()
         {
-            RuleFor(w => w.Name).NotEmpty().NotNull().WithMessage(string.Format(ValidationMessage.NullOrEmptyMessage, nameof(UpdateContactRequest.Name)));
-            RuleFor(w => w.LastName).NotEmpty().NotNull().WithMessage(string.Format(ValidationMessage.NullOrEmptyMessage, nameof(UpdateContactRequest.LastName)));
-            RuleFor(w => w.Firm).NotEmpty().NotNull().WithMessage(string.Format(ValidationMessage.NullOrEmptyMessage, nameof(UpdateContactRequest.Firm)));
+            RuleFor(w => w.Name).NotEmpty().NotNull().WithMessage(string.Format(CommonMessage.NullOrEmptyMessage, nameof(UpdateContactRequest.Name)));
+            RuleFor(w => w.LastName).NotEmpty().NotNull().WithMessage(string.Format(CommonMessage.NullOrEmptyMessage, nameof(UpdateContactRequest.LastName)));
+            RuleFor(w => w.Firm).NotEmpty().NotNull().WithMessage(string.Format(CommonMessage.NullOrEmptyMessage, nameof(UpdateContactRequest.Firm)));
         }
     }
 }

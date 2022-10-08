@@ -15,6 +15,7 @@ namespace PostgresAdapter.Repository
     {
 
         public async Task<IListModel<TMapped>> List<TMapped>(IFilterModel model, List<Expression<Func<T, object>>> joinTables = null)
+            where TMapped : class, new()
         {
             using (var context = ServiceTool.GetRootService<DbContext>())
             {
@@ -34,6 +35,7 @@ namespace PostgresAdapter.Repository
         }
 
         public async Task<TMapped> FirstOrDefault<TMapped>(IFilterModel model, List<Expression<Func<T, object>>> joinTables = null)
+            where TMapped : class, new()
         {
             using (var context = ServiceTool.GetRootService<DbContext>())
             {

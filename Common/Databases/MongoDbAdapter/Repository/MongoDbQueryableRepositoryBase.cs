@@ -26,6 +26,7 @@ namespace MongoDbAdapter.Repository
 
 
         public async Task<IListModel<TMapped>> List<TMapped>(IFilterModel model, List<Expression<Func<T, object>>> joinTables = null)
+            where TMapped : class, new()
         {
             var queryable = _collection.AsQueryable();
             var turnModel = new ListModel<TMapped>
@@ -41,6 +42,7 @@ namespace MongoDbAdapter.Repository
         }
 
         public async Task<TMapped> FirstOrDefault<TMapped>(IFilterModel model, List<Expression<Func<T, object>>> joinTables = null)
+            where TMapped : class, new()
         {
             var queryable = _collection.AsQueryable();
             var _query = queryable.ApplyDynamicFilter(model.Filters);

@@ -35,11 +35,11 @@ namespace SSTTEK.ContactInformation.Business.Concrete
         {
             var res = await _queryableRepositoryBase.List<ContactInformationResponse>(request);
 
-            if (res == null || !res.Items.Any())
+            if (!res.Items.Any())
             {
                 return Response<IEnumerable<ContactInformationResponse>>.Fail(CommonMessage.NotFound, 404);
             }
-            return Response<IEnumerable<ContactInformationResponse>>.Success(res.Items, 201);
+            return Response<IEnumerable<ContactInformationResponse>>.Success(res.Items, 200);
         }
 
         public async Task<Response<ContactInformationResponse>> Get(FilterModel request)
@@ -50,7 +50,7 @@ namespace SSTTEK.ContactInformation.Business.Concrete
             {
                 return Response<ContactInformationResponse>.Fail(CommonMessage.NotFound, 404);
             }
-            return Response<ContactInformationResponse>.Success(res, 201);
+            return Response<ContactInformationResponse>.Success(res, 200);
         }
 
 

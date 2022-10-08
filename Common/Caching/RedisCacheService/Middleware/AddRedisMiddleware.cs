@@ -10,11 +10,7 @@ namespace RedisCacheService.Middleware
     {
         public static IServiceCollection AddRedis(this IServiceCollection services, RedisOptions opt)
         {
-            services.AddSingleton<RedisOptions>(sp =>
-            {
-                return sp.GetRequiredService<IOptions<RedisOptions>>().Value;
-            });
-
+           
             services.AddSingleton<IRedisCacheService, RedisCacheManager>();
             services.AddStackExchangeRedisCache(options =>
             {

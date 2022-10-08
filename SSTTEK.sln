@@ -123,11 +123,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Amqp", "Amqp", "{6FFF9190-4
 		LocationTasks.txt = LocationTasks.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.Contact.AmqpService", "Services\Contact\Amqp\SSTTEK.Contact.AmqpService\SSTTEK.Contact.AmqpService.csproj", "{4C134D98-E1F5-462F-A058-ED1E6C60E0F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Contact.AmqpService", "Services\Contact\Amqp\SSTTEK.Contact.AmqpService\SSTTEK.Contact.AmqpService.csproj", "{4C134D98-E1F5-462F-A058-ED1E6C60E0F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.ContactInformation.Consumer", "Services\ContactInformation\Amqp\SSTTEK.ContactInformation.Consumer\SSTTEK.ContactInformation.Consumer.csproj", "{8A2D37B5-F51B-41A6-923E-9BE025DCC94A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.ContactInformation.Consumer", "Services\ContactInformation\Amqp\SSTTEK.ContactInformation.Consumer\SSTTEK.ContactInformation.Consumer.csproj", "{8A2D37B5-F51B-41A6-923E-9BE025DCC94A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSTTEK.Location.AmqpService", "Services\Location\Amqp\SSTTEK.Location.AmqpService\SSTTEK.Location.AmqpService.csproj", "{F4CDE280-83F6-4720-9835-E7410020D2A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSTTEK.Location.AmqpService", "Services\Location\Amqp\SSTTEK.Location.AmqpService\SSTTEK.Location.AmqpService.csproj", "{F4CDE280-83F6-4720-9835-E7410020D2A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools.Tests", "Common\Test\Tools.Tests\Tools.Tests.csproj", "{E5310FE6-3613-47D3-BC9D-FC8FADC9B5F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -291,6 +293,10 @@ Global
 		{F4CDE280-83F6-4720-9835-E7410020D2A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4CDE280-83F6-4720-9835-E7410020D2A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4CDE280-83F6-4720-9835-E7410020D2A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5310FE6-3613-47D3-BC9D-FC8FADC9B5F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5310FE6-3613-47D3-BC9D-FC8FADC9B5F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5310FE6-3613-47D3-BC9D-FC8FADC9B5F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5310FE6-3613-47D3-BC9D-FC8FADC9B5F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -349,6 +355,7 @@ Global
 		{4C134D98-E1F5-462F-A058-ED1E6C60E0F1} = {472AF711-B723-45AA-BEF1-4625506F6644}
 		{8A2D37B5-F51B-41A6-923E-9BE025DCC94A} = {2B67C0ED-1164-4B50-8558-A94C52F66AE0}
 		{F4CDE280-83F6-4720-9835-E7410020D2A1} = {6FFF9190-4C67-43A8-8068-64A574412C5B}
+		{E5310FE6-3613-47D3-BC9D-FC8FADC9B5F7} = {0EC136FD-C096-4750-88A4-4CAA1C030C28}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {933ABDA7-FF88-4E51-BBAE-690E0B356FAB}

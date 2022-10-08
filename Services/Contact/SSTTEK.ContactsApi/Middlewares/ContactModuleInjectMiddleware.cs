@@ -5,6 +5,7 @@ using ServerBaseContract.Repository.Abstract;
 using SSTTEK.Contact.AmqpService.Sender.ContactInformation;
 using SSTTEK.Contact.Business.Concrete;
 using SSTTEK.Contact.Business.Contract;
+using SSTTEK.Contact.Business.HttpClients.Handler;
 using SSTTEK.Contact.DataAccess.Concrete;
 using SSTTEK.Contact.DataAccess.Context;
 using SSTTEK.Contact.DataAccess.Contract;
@@ -29,7 +30,7 @@ namespace SSTTEK.Contact.Api.Middlewares
             services.AddScoped<IContactDal, ContactDal>();
             services.AddScoped(typeof(IQueryableRepositoryBase<>),typeof(MsSqlQueryableRepositoryBase<>));
             services.AddScoped<IContactInformationSender, ContactInformationSender>();
-            
+            services.AddScoped<UpdateHeaderHandler>();
             return services;
         }
 

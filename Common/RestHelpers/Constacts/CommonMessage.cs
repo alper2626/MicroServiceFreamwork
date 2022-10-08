@@ -12,7 +12,7 @@ namespace RestHelpers.Constacts
 
         public const string WrongFormat = "Entered the wrong format {0}";
 
-        public const string ConnotContainsSpace = "{} Field Cannot Contain Spaces";
+        public const string ConnotContainsSpace = "{0} Field Cannot Contain Spaces";
 
         public const string ServerError = "Error Occurred During Operation";
 

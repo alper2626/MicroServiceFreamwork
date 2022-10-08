@@ -1,6 +1,5 @@
 ﻿using AutoMapperAdapter;
 using EntityBase.Abstract;
-using EntityBase.Abstract;
 using EntityBase.Concrete;
 using Microsoft.EntityFrameworkCore;
 using RestHelpers.DIHelpers;
@@ -15,6 +14,7 @@ namespace MsSqlAdapter.Repository
     {
 
         public async Task<IListModel<TMapped>> List<TMapped>(IFilterModel model, List<Expression<Func<T, object>>> joinTables = null)
+            where TMapped : class, new()
         {
             using (var context = ServiceTool.GetRootService<DbContext>())
             {
@@ -34,6 +34,7 @@ namespace MsSqlAdapter.Repository
         }
 
         public async Task<TMapped> FirstOrDefault<TMapped>(IFilterModel model, List<Expression<Func<T, object>>> joinTables = null)
+            where TMapped : class, new()
         {
             using (var context = ServiceTool.GetRootService<DbContext>())
             {

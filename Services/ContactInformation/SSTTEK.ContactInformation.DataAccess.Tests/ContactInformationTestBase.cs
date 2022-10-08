@@ -5,7 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using ServerBaseContract;
+using SSTTEK.ContactInformation.DataAccess.Concrete;
 using SSTTEK.ContactInformation.DataAccess.Context;
+using SSTTEK.ContactInformation.DataAccess.Contract;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestBase;
@@ -45,6 +47,8 @@ namespace SSTTEK.ContactInformation.DataAccess.Tests
             #endregion
 
             services.AddTransient<DbContext, ContactInformationModuleContext>();
+
+            services.AddScoped<IContactInformationDal, ContactInformationDal>();
         }
 
         protected override ValueTask DisposeAsyncCore()

@@ -32,6 +32,9 @@ namespace Tools.ObjectHelpers
 
         public static StringContent ToStringContent<T>(T obj)
         {
+            if (obj == null)
+                return null;
+
             return new StringContent(
                          JsonSerializer.Serialize(obj),
                          Encoding.UTF8,

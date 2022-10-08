@@ -17,7 +17,7 @@ using SSTTEK.Contact.Business.HttpClients.Handler;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-var businessAssembly = Assembly.Load(Assembly.GetExecutingAssembly().GetReferencedAssemblies().SingleOrDefault(q => q.FullName.Contains("Contact.Business")));
+var businessAssembly = Assembly.Load(Assembly.GetExecutingAssembly().GetReferencedAssemblies().SingleOrDefault(q => q.FullName.Contains("SSTTEK.Contact.Business")));
 
 
 #region Add Interceptors

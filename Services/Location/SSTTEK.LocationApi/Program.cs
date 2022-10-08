@@ -92,17 +92,6 @@ builder.Services.AddRabbitMqModules(
 
 #endregion
 
-#region Add Redis
-
-builder.Services.AddRedis(new RedisOptions
-{
-    Host = builder.Configuration["RedisOptions:Host"],
-    Port = builder.Configuration["RedisOptions:Port"],
-    Password = builder.Configuration["RedisOptions:Password"],
-});
-
-#endregion
-
 #region AutoMapper Configuration
 
 AutoMapperWrapper.Configure();

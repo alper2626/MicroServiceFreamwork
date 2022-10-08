@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SSTTEK.Contact.Business.HttpClients.Handler
+﻿namespace SSTTEK.Contact.Business.HttpClients.Handler
 {
     public class UpdateHeaderHandler : DelegatingHandler
     {

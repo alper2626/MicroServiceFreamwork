@@ -22,11 +22,12 @@ namespace SSTTEK.Contact.Business.Concrete
         IContactInformationClient _contactInformationClient;
         IContactInformationSender _contactInformationSender;
 
-        public ContactManager(IContactDal contactDal, IQueryableRepositoryBase<ContactEntity> queryableRepositoryBase, IContactInformationClient contactInformationClient)
+        public ContactManager(IContactDal contactDal, IQueryableRepositoryBase<ContactEntity> queryableRepositoryBase, IContactInformationClient contactInformationClient, IContactInformationSender contactInformationSender)
         {
             _contactDal = contactDal;
             _queryableRepositoryBase = queryableRepositoryBase;
             _contactInformationClient = contactInformationClient;
+            _contactInformationSender = contactInformationSender;
         }
 
         public async Task<Response<CreateContactRequest>> Create(CreateContactRequest request)
@@ -51,7 +52,7 @@ namespace SSTTEK.Contact.Business.Concrete
 
         public async Task<Response<IEnumerable<ContactResponse>>> Delete(FilterModel request)
         {
-            var res = await _queryableRepositoryBase.List<ContactResponse>(request);
+            var res = await _queryableRepositoryBase.List<ContactResponse>(request,null);
             var entities = AutoMapperWrapper.Mapper.Map<List<ContactEntity>>(res.Items);
             if (_contactDal.SetState(entities, OperationType.Delete) == null)
             {
@@ -64,11 +65,11 @@ namespace SSTTEK.Contact.Business.Concrete
         {
             var res = await _queryableRepositoryBase.List<ContactResponse>(request);
 
-            if (res == null || !res.Items.Any())
+            if (!res.Items.Any())
             {
                 return Response<IEnumerable<ContactResponse>>.Fail(CommonMessage.NotFound, 404);
             }
-            return Response<IEnumerable<ContactResponse>>.Success(res.Items, 201);
+            return Response<IEnumerable<ContactResponse>>.Success(res.Items, 200);
         }
 
         public async Task<Response<ContactResponse>> Get(FilterModel request)
@@ -79,7 +80,7 @@ namespace SSTTEK.Contact.Business.Concrete
             {
                 return Response<ContactResponse>.Fail(CommonMessage.NotFound, 404);
             }
-            return Response<ContactResponse>.Success(res, 201);
+            return Response<ContactResponse>.Success(res, 200);
         }
 
         public async Task<Response<ContactDetailedResponse>> GetWithDetail(FilterModel request)
@@ -98,7 +99,7 @@ namespace SSTTEK.Contact.Business.Concrete
             }
 
             res.Informations = httpRes.Data;
-            return Response<ContactDetailedResponse>.Success(res, 201);
+            return Response<ContactDetailedResponse>.Success(res, 200);
 
         }
 

@@ -26,11 +26,13 @@ namespace SSTTEK.ContactInformation.DataAccess.Context
         }
 
         public virtual DbSet<ContactInformationEntity> ContactInformations { get; set; }
-        
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ContactInformationEntity>().HasIndex(w => w.ContentIndex);
+            modelBuilder.Entity<ContactInformationEntity>().HasIndex(w => w.ContactEntityId);
+            modelBuilder.Entity<ContactInformationEntity>().HasIndex(w => new { w.ContactInformationType, w.IsRemoved });
 
             base.OnModelCreating(modelBuilder);
         }

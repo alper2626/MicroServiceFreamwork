@@ -38,20 +38,19 @@ namespace RedisCacheService.Concrete
         public void Delete(string key)
         {
             _database = this.GetDb(0);
-            _database.KeyDelete(key);
+            _database.KeyDeleteAsync(key);
         }
 
         public void DeleteStartWithPattern(string pattern)
         {
-            var server = _redis.GetServer(_options.Host, _options.Port);
-            if (server != null)
+            foreach (var ep in _redis.GetEndPoints())
             {
-                _database = this.GetDb(0);
-                foreach (var key in server.Keys(pattern: $"{pattern}*"))
-                {
-                    _database.KeyDelete(key);
-                }
+                var server = _redis.GetServer(ep);
+                var keys = server.Keys(database: 0, pattern: pattern + "*").ToArray();
+                if (keys.Length > 0)
+                    _database.KeyDeleteAsync(keys);
             }
+
         }
 
         public string Get(string key)

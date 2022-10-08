@@ -1,7 +1,6 @@
 ﻿using AutoMapperAdapter;
 using EntityBase.Abstract;
 using EntityBase.Concrete;
-using EntityBase.Concrete;
 using Tools.ExpressionBuilder;
 
 namespace Tools.QueryableExtension
@@ -11,10 +10,13 @@ namespace Tools.QueryableExtension
         public static ListModel<RT> ApplyAllFilter<RT, T>(this IQueryable<T> queryable, IFilterModel model)
            where T : IEntity
         {
-            var turnModel = new ListModel<RT>
-            {
-                CurrentPage = model.Page
-            };
+            var turnModel = new ListModel<RT>();
+            if (model == null)
+                return turnModel;
+
+            turnModel.CurrentPage = model.Page;
+
+
             var _query = queryable.ApplyDynamicFilter(model.Filters);
             turnModel.TotalItem = _query.Count();
             turnModel.MaxPage = Math.Ceiling(turnModel.TotalItem / (decimal)model.Take);

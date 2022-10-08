@@ -51,11 +51,11 @@ namespace SSTTEK.Location.Business.Concrete
         {
             var res = await _queryableRepositoryBase.List<LocationResponse>(request);
 
-            if (res == null || !res.Items.Any())
+            if (!res.Items.Any())
             {
                 return Response<IEnumerable<LocationResponse>>.Fail(CommonMessage.NotFound, 404);
             }
-            return Response<IEnumerable<LocationResponse>>.Success(res.Items, 201);
+            return Response<IEnumerable<LocationResponse>>.Success(res.Items, 200);
         }
 
         public async Task<Response<LocationResponse>> Get(FilterModel request)
@@ -66,7 +66,7 @@ namespace SSTTEK.Location.Business.Concrete
             {
                 return Response<LocationResponse>.Fail(CommonMessage.NotFound, 404);
             }
-            return Response<LocationResponse>.Success(res, 201);
+            return Response<LocationResponse>.Success(res, 200);
         }
 
         public async Task<Response<UpdateLocationRequest>> Update(UpdateLocationRequest request)

@@ -17,7 +17,7 @@ namespace SSTTEK.Location.Entities.Db
 
             CreateMap<LocationEntity, UpdateLocationRequest>().ReverseMap();
 
-            CreateMap<LocationEntity, LocationResponse>();
+            CreateMap<LocationEntity, LocationResponse>().ReverseMap();
         }
     }
 }

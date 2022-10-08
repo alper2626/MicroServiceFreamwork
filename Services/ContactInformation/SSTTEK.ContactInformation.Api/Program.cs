@@ -9,23 +9,25 @@ using FluentValidationAdapter;
 using FluentValidationAdapter.Filter;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using RedisCacheService.Middleware;
+using RedisCacheService.Models;
 using RestHelpers.DIHelpers;
 using ServerBaseContract;
 using SSTTEK.ContactInformation.Api.Middlewares;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-//var businessAssembly = Assembly.Load(Assembly.GetExecutingAssembly().GetReferencedAssemblies().SingleOrDefault(q => q.FullName.Contains("ContactInfortmation.Business")));
-
+var businessAssembly = Assembly.Load(Assembly.GetExecutingAssembly().GetReferencedAssemblies().SingleOrDefault(q => q.FullName.Contains("SSTTEK.ContactInformation.Business")));
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 #region Add Interceptors
 
-//builder.Host
-//    .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-//    .ConfigureContainer<ContainerBuilder>(cfg =>
-//    {
-//        cfg.RegisterModule(new InterceptorsAutoFacModule(businessAssembly));
-//    });
+builder.Host
+    .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureContainer<ContainerBuilder>(cfg =>
+    {
+        cfg.RegisterModule(new InterceptorsAutoFacModule(businessAssembly));
+    });
 
 #endregion
 
@@ -87,6 +89,29 @@ builder.Services.AddRabbitMqModules(
         UserName = builder.Configuration["RabbitMq:UserName"],
         Port = ushort.Parse(builder.Configuration["RabbitMq:Port"]),
     });
+
+#endregion
+
+#region Add Redis
+
+builder.Services.Configure<RedisOptions>(options =>
+{
+    options.Host = builder.Configuration["RedisOptions:Host"];
+    options.Port = builder.Configuration["RedisOptions:Port"];
+    options.Password = builder.Configuration["RedisOptions:Password"];
+});
+
+builder.Services.AddSingleton<RedisOptions>(sp =>
+{
+    return sp.GetRequiredService<IOptions<RedisOptions>>().Value;
+});
+
+builder.Services.AddRedis(new RedisOptions
+{
+    Host = builder.Configuration["RedisOptions:Host"],
+    Port = builder.Configuration["RedisOptions:Port"],
+    Password = builder.Configuration["RedisOptions:Password"],
+});
 
 #endregion
 

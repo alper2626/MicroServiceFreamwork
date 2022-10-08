@@ -11,7 +11,6 @@ namespace SSTTEK.ContactInformation.Business.Validators.ContactInformation
         public CreateContactInformationRequestValidator()
         {
             RuleFor(w => w.ContactEntityId).NotEmpty().NotNull().WithMessage(string.Format(CommonMessage.NullOrEmptyMessage, nameof(CreateContactInformationRequest.ContactEntityId)));
-            RuleFor(w => w.ContactInformationType).NotEmpty().NotNull().WithMessage(string.Format(CommonMessage.NullOrEmptyMessage, nameof(CreateContactInformationRequest.ContactInformationType)));
             RuleFor(w => w.Content).NotEmpty().NotNull().WithMessage(string.Format(CommonMessage.NullOrEmptyMessage, nameof(CreateContactInformationRequest.Content)));
             RuleFor(w => w.Content).Must(StringHelper.NotContainSpace).WithMessage(string.Format(CommonMessage.ConnotContainsSpace, nameof(CreateContactInformationRequest.Content)));
             RuleFor(w => w).Must(ValidatePhoneOrMailAddress).WithMessage(string.Format(CommonMessage.WrongFormat, nameof(CreateContactInformationRequest.Content)));
@@ -26,8 +25,9 @@ namespace SSTTEK.ContactInformation.Business.Validators.ContactInformation
                 case ContactInformationType.MailAddress:
                     return StringHelper.IsValidMailAddress(model.Content);
                 case ContactInformationType.Location:
-                default:
                     return true;
+                default:
+                    return false;
             }
         }
     }

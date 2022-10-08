@@ -14,8 +14,7 @@ namespace CastleInterceptors.Aspects.Redis
         private string _removeKey;
         private IRedisCacheService _cacheService;
         private int _slidingMin;
-        private string _cacheKey;
-
+        
         public FromRedisCacheAspect(string key = "", int slidingMin = 1)
         {
             _cacheService = ServiceTool.GetRootService<IRedisCacheService>();

@@ -8,21 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
-    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -34,8 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Test\TestBase\TestBase.csproj" />
-    <ProjectReference Include="..\SSTTEK.Contacts.Business\SSTTEK.Contact.Business.csproj" />
+    <ProjectReference Include="..\..\Tools\Tools.csproj" />
   </ItemGroup>
 
 </Project>

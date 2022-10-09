@@ -23,4 +23,9 @@ namespace MongoDbExtender.Models
         [BsonElement(Order = 201)]
         public DateTime UpdateTime { get; set; }
     }
+
+    public class RemovebleMongoEntity : MongoEntity, IRemovableEntity
+    {
+        public bool IsRemoved { get; set; }
+    }
 }

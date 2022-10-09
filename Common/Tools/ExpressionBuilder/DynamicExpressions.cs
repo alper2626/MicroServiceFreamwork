@@ -1,4 +1,5 @@
 ﻿using EntityBase.Enum;
+using EntityBase.Exceptions;
 using System.Collections;
 using System.ComponentModel;
 using System.Linq.Expressions;
@@ -50,16 +51,25 @@ namespace Tools.ExpressionBuilder
 
         internal static Expression GetFilter(ParameterExpression param, string property, FilterOperator op, object value)
         {
-            if (value is string && op == FilterOperator.ContainsIgnoreCase)
+            try
             {
-                value = value.ToString().ToLower();
-            }
 
-            var prop = param.GetNestedProperty(property);
-            var type = prop.Type;
-            var c = TypeDescriptor.GetConverter(type).ConvertFromInvariantString(value.ToString());
-            ConstantExpression constant = Expression.Constant(c, type);
-            return CreateFilter(prop, op, constant);
+
+                if (value is string && op == FilterOperator.ContainsIgnoreCase)
+                {
+                    value = value.ToString().ToLower();
+                }
+
+                var prop = param.GetNestedProperty(property);
+                var type = prop.Type;
+                var c = TypeDescriptor.GetConverter(type).ConvertFromInvariantString(value.ToString());
+                ConstantExpression constant = Expression.Constant(c, type);
+                return CreateFilter(prop, op, constant);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomErrorException($"Type Conversation Error : {property} property must be {param.GetNestedProperty(property).Type.Name}",400);
+            }
         }
 
         private static Expression CreateFilter(MemberExpression prop, FilterOperator op, ConstantExpression constant)

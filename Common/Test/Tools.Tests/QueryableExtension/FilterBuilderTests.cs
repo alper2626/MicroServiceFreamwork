@@ -20,23 +20,60 @@ namespace Tools.Tests.QueryableExtension
         }
 
         [Fact]
-        public void ApplyAllFilterWhenFilterModelNull_ReturnEmptyItems()
+        public void ApplyAllFilter_WhenFilterModelNull_ThrowException()
         {
-            var queryable = new List<TestClass>() { new TestClass { Name="testtest"} }.AsQueryable();
-            var result = FilterBuilder.ApplyAllFilter<TestClassTwo, TestClass>(queryable, null);
-            Assert.False(result.Items.Any());
+            var queryable = new List<TestClass>() { new TestClass { Name = "testtest" } }.AsQueryable();
+            Assert.Throws<Exception>(() => FilterBuilder.ApplyAllFilter<TestClassTwo, TestClass>(queryable, null));
         }
 
         [Fact]
-        public void ApplyAllFilterWhenFilterModelNull_ReturnFilteredItems()
+        public void ApplyAllFilter_WhenFilterModelNull_ReturnFilteredItems()
         {
             var queryable = new List<TestClass>() { new TestClass { Name = "testtest" } }.AsQueryable();
-            var result = FilterBuilder.ApplyAllFilter<TestClassTwo, TestClass>(queryable, FilterModel.Get(nameof(TestClass.Name),EntityBase.Enum.FilterOperator.Contains,"test"));
+            var result = FilterBuilder.ApplyAllFilter<TestClassTwo, TestClass>(queryable, FilterModel.Get(nameof(TestClass.Name), EntityBase.Enum.FilterOperator.Contains, "test"));
             Assert.True(result.Items.Any());
         }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("NotFoundProp")]
+        public void ApplyOrderFilter_WhenOrderStringNotContainingFromModel_ReturnSameQueryable(string? order)
+        {
+            var queryable = new List<TestClass>() { new TestClass { Name = "testtest" } }.AsQueryable();
+            Assert.StrictEqual(queryable, FilterBuilder.ApplyOrderFilter<TestClass>(queryable, order, false));
+        }
+
+        [Theory]
+        [InlineData("Name")]
+        public void ApplyOrderFilter_WhenOrderStringContainingFromModel_ReturnOrderedQueryable(string? order)
+        {
+            var queryable = new List<TestClass>() { new TestClass { Name = "testtest" } }.AsQueryable();
+            Assert.NotStrictEqual(queryable, FilterBuilder.ApplyOrderFilter<TestClass>(queryable, order, false));
+        }
+
+        [Theory]
+        [InlineData("Name")]
+        public void ApplyDynamicFilter_WhenFiltersContainingFromModel_ReturnQueryable(string prop)
+        {
+            var queryable = new List<TestClass>() { new TestClass { Name = "testtest" } }.AsQueryable();
+            var filter = new List<FilterItem> { new FilterItem { Prop = prop, Operator = EntityBase.Enum.FilterOperator.Equals, Value = "test" } };
+            Assert.NotNull(FilterBuilder.ApplyDynamicFilter(queryable,filter));
+        }
+
+        [Theory]
+        [InlineData("test")]
+        public void ApplyDynamicFilter_WhenFiltersNotContainingFromModel_ThrowException(string prop)
+        {
+            var queryable = new List<TestClass>() { new TestClass { Name = "testtest" } }.AsQueryable();
+            Assert.Throws<Exception>(() => FilterBuilder.ApplyDynamicFilter<TestClass>(queryable, new List<FilterItem> { new FilterItem { Prop = prop, Operator = EntityBase.Enum.FilterOperator.Equals, Value = "test" } }));
+        }
+
+
+
     }
 
-    public class TestMapProfile: Profile
+    public class TestMapProfile : Profile
     {
         public TestMapProfile()
         {

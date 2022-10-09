@@ -2,6 +2,7 @@
 using EntityBase.Concrete;
 using EntityBase.Poco.Responses;
 using SSTTEK.ContactInformation.Entities.Poco.ContactInformationDto;
+using SSTTEK.MassTransitCommon.Events;
 
 namespace SSTTEK.ContactInformation.Business.Contracts
 {
@@ -16,5 +17,7 @@ namespace SSTTEK.ContactInformation.Business.Contracts
 
         [RemoveRedisCacheAspect("locationreport")]
         Task<Response<IEnumerable<ContactInformationResponse>>> Remove(FilterModel request);
+
+        Task UpdateLocationNamesEventConsume(LocationModifiedEvent @event);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapperAdapter;
 using EntityBase.Abstract;
 using EntityBase.Concrete;
+using EntityBase.Exceptions;
+using System.Reflection;
 using Tools.ExpressionBuilder;
 
 namespace Tools.QueryableExtension
@@ -8,14 +10,16 @@ namespace Tools.QueryableExtension
     public static partial class FilterBuilder
     {
         public static ListModel<RT> ApplyAllFilter<RT, T>(this IQueryable<T> queryable, IFilterModel model)
-           where T : IEntity
+           where T : class, IEntity, new()
         {
-            var turnModel = new ListModel<RT>();
             if (model == null)
-                return turnModel;
-
-            turnModel.CurrentPage = model.Page;
-
+            {
+                throw new CustomErrorException("Filters Not Found.", 400);
+            }
+            var turnModel = new ListModel<RT>
+            {
+                CurrentPage = model.Page,
+            };
 
             var _query = queryable.ApplyDynamicFilter(model.Filters);
             turnModel.TotalItem = _query.Count();
@@ -27,9 +31,9 @@ namespace Tools.QueryableExtension
         }
 
         public static IQueryable<T> ApplyOrderFilter<T>(this IQueryable<T> queryable, string? order, bool? desc)
-            where T : IEntity
+            where T : class, IEntity, new()
         {
-            if (string.IsNullOrEmpty(order))
+            if (string.IsNullOrEmpty(order) || typeof(T).GetType().GetProperty(order) == null)
                 return queryable;
 
             var prop = DynamicExpressions.GetPropertyGetter<T>(order);
@@ -39,7 +43,7 @@ namespace Tools.QueryableExtension
         }
 
         public static IQueryable<T> ApplyPageFilter<T>(this IQueryable<T> queryable, int skip, int take)
-            where T : IEntity
+            where T : class, IEntity, new()
         {
             if (skip == 0)
                 return queryable.Take(take);
@@ -47,10 +51,13 @@ namespace Tools.QueryableExtension
         }
 
         public static IQueryable<T> ApplyDynamicFilter<T>(this IQueryable<T> queryable, List<FilterItem> models)
-            where T : IEntity
+            where T : class, IEntity, new()
         {
+
             if (models == null)
                 return queryable;
+
+            ModelContainFiltersProperties<T>(models);
             foreach (var item in models)
             {
                 if (item.Value == null)
@@ -60,6 +67,20 @@ namespace Tools.QueryableExtension
             }
             return queryable;
         }
+
+        public static void ModelContainFiltersProperties<T>(List<FilterItem> filters)
+            where T : class, IEntity, new()
+        {
+            var props = Activator.CreateInstance<T>().GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var filter in filters)
+            {
+                if (!props.Any(w => w.Name == filter.Prop))
+                {
+                    throw new CustomErrorException($"{filter.Prop} Property Not Found.Please Try With {string.Join(", ", props.Select(w => w.Name))}", 400);
+                }
+            }
+        }
+
 
 
     }

@@ -18,7 +18,8 @@ namespace SSTTEK.ContactInformation.Api.Controllers
         [HttpGet("get")]
         public async Task<IActionResult> Get()
         {
-            return CreateActionResult(await _contactInformationReportService.GetLocationBasedReport());
+            throw new NotImplementedException();
+            //return CreateActionResult(await _contactInformationReportService.GetLocationBasedReport());
         }
     }
 }

@@ -4,10 +4,12 @@ using EntityBase.Enum;
 using EntityBase.Poco.Responses;
 using RestHelpers.Constacts;
 using ServerBaseContract.Repository.Abstract;
+using SSTTEK.Contact.Entities.Enum;
 using SSTTEK.ContactInformation.Business.Contracts;
 using SSTTEK.ContactInformation.DataAccess.Contract;
 using SSTTEK.ContactInformation.Entities.Db;
 using SSTTEK.ContactInformation.Entities.Poco.ContactInformationDto;
+using SSTTEK.MassTransitCommon.Events;
 
 namespace SSTTEK.ContactInformation.Business.Concrete
 {
@@ -65,5 +67,15 @@ namespace SSTTEK.ContactInformation.Business.Concrete
             return Response<IEnumerable<ContactInformationResponse>>.Success(res.Items, 201);
         }
 
+        public async Task UpdateLocationNamesEventConsume(LocationModifiedEvent @event)
+        {
+            var resultSet = await _contactInformationDal.GetListAsync(w => w.ContentIndex == @event.OldName);
+            resultSet.ForEach(x =>
+            {
+                x.ContentIndex = @event.NewName.ToLower();
+                x.Content = @event.NewName;
+            });
+            _contactInformationDal.SetState(resultSet, OperationType.Update);
+        }
     }
 }

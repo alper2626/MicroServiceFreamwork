@@ -1,6 +1,7 @@
 ﻿using EntityBase.Abstract;
 using EntityBase.Enum;
 using MongoDB.Driver;
+using MongoDbExtender.Models;
 using ServerBaseContract;
 using ServerBaseContract.Repository.Abstract;
 using System.Linq.Expressions;
@@ -8,7 +9,7 @@ using System.Linq.Expressions;
 namespace MongoDbAdapter.Repository
 {
     public class MongoDbRepositoryBase<T> : IEntityRepositoryBase<T>
-        where T : class, IEntity, new()
+        where T : MongoEntity, IEntity, new()
     {
         private readonly IMongoCollection<T> _collection;
         private readonly DatabaseOptions _settings;

@@ -12,8 +12,8 @@ using SSTTEK.ContactInformation.DataAccess.Context;
 namespace SSTTEK.ContactInformation.DataAccess.Migrations
 {
     [DbContext(typeof(ContactInformationModuleContext))]
-    [Migration("20221007214511_firstmig")]
-    partial class firstmig
+    [Migration("20221009130554_first-migration")]
+    partial class firstmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,17 +45,21 @@ namespace SSTTEK.ContactInformation.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime>("UpdateTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ContactEntityId");
+
                     b.HasIndex("ContentIndex");
+
+                    b.HasIndex("ContactInformationType", "IsRemoved");
 
                     b.ToTable("ContactInformations");
                 });

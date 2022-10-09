@@ -17,7 +17,6 @@ using SSTTEK.Contact.Entities.Poco.ContactInformationDto;
 using SSTTEK.MassTransitCommon.Commands;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
@@ -187,7 +186,7 @@ namespace SSTTEK.Contact.Business.Tests.Concrete
 
             //Arrange
             _mockQueryable.Setup(w => w.FirstOrDefault<ContactDetailedResponse>(It.IsAny<FilterModel>(), null))
-                .Returns(Task.FromResult<ContactDetailedResponse>(null)).Verifiable();
+                .Returns((Task<ContactDetailedResponse>)null).Verifiable();
 
             //Act
             var result = await _contactService.GetWithDetail(Fixture.Create<FilterModel>());

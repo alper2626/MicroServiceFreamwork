@@ -3,7 +3,7 @@ using SSTTEK.Contact.Entities.Poco.ContactInformationDto;
 
 namespace SSTTEK.Contact.Entities.Poco.ContactDto
 {
-    public class ContactDetailedResponse : GetModel
+    public class ContactDetailedResponse
     {
         public ContactResponse Contact { get; set; }
 

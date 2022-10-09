@@ -1,6 +1,5 @@
 ﻿using AutoMapperAdapter;
 using EntityBase.Abstract;
-using EntityBase.Abstract;
 using EntityBase.Concrete;
 using Microsoft.EntityFrameworkCore;
 using RestHelpers.DIHelpers;

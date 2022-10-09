@@ -66,6 +66,38 @@ namespace SSTTEK.ContactInformation.Business.Tests.Concrete
         }
 
         [Fact]
+        public async Task CreateList_WhenSetStateFail_ReturnFailResponse()
+        {
+            //Arrange
+            _mockContactInformationDal.Setup(w => w.SetState(It.IsAny<List<ContactInformationEntity>>(), OperationType.Create))
+                .Returns((List<ContactInformationEntity>)null)
+                .Verifiable();
+
+            //Act
+            var result = await _contactInformationService.Create(Fixture.Create<List<CreateContactInformationRequest>>());
+
+            //Assert
+            Assert.False(result.IsSuccessful);
+            Assert.Equal("500", result.StatusCode.ToString());
+        }
+
+        [Fact]
+        public async Task CreateList_WhenSetStateSuccess_ReturnSuccessResponse()
+        {
+            //Arrange
+            _mockContactInformationDal.Setup(w => w.SetState(It.IsAny<List<ContactInformationEntity>>(), OperationType.Create))
+                .Returns(Fixture.Create<List<ContactInformationEntity>>())
+                .Verifiable();
+
+            //Act
+            var result = await _contactInformationService.Create(Fixture.Create<List<CreateContactInformationRequest>>());
+
+            //Assert
+            Assert.True(result.IsSuccessful);
+            Assert.Equal("200", result.StatusCode.ToString());
+        }
+
+        [Fact]
         public async Task GetList_WhenListIsEmpty_ReturnFailResponse()
         {
 

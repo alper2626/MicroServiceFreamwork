@@ -9,15 +9,13 @@ using FluentValidationAdapter;
 using FluentValidationAdapter.Filter;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using RedisCacheService.Middleware;
-using RedisCacheService.Models;
 using RestHelpers.DIHelpers;
 using ServerBaseContract;
 using SSTTEK.Location.Api.Middlewares;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-var businessAssembly = Assembly.Load(Assembly.GetExecutingAssembly().GetReferencedAssemblies().SingleOrDefault(q => q.FullName.Contains("Location.Business")));
+var businessAssembly = Assembly.Load(Assembly.GetExecutingAssembly().GetReferencedAssemblies().SingleOrDefault(q => q.FullName.Contains("SSTTEK.Location.Business")));
 
 
 #region Add Interceptors
@@ -94,7 +92,7 @@ builder.Services.AddRabbitMqModules(
 
 #region AutoMapper Configuration
 
-AutoMapperWrapper.Configure();
+AutoMapperWrapper.Configure(Assembly.Load("SSTTEK.MassTransitCommon"));
 
 #endregion
 

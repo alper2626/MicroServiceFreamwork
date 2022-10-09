@@ -12,9 +12,6 @@ services:
     - RABBITMQ_DEFAULT_PASS=Neslican26*-
    volumes:
     - rabbitmq-data:/usr/share/rabbitmq/data
-networks:
-  elastic:
-    driver: bridge
 
 volumes:
   rabbitmq-data:

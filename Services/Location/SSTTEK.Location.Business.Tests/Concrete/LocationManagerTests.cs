@@ -26,7 +26,6 @@ namespace SSTTEK.Location.Business.Tests.Concrete
     {
         ITestOutputHelper _testOutputHelper;
         Mock<ILocationDal> _mockLocationDal;
-        Mock<IQueryableRepositoryBase<LocationEntity>> _mockQueryable;
         ILocationService _locationService;
         Mock<ILocationPublisher> _mockLocationPublisher;
         public LocationManagerTests(ITestOutputHelper testOutputHelper)
@@ -34,8 +33,7 @@ namespace SSTTEK.Location.Business.Tests.Concrete
             _testOutputHelper = testOutputHelper;
             _mockLocationPublisher = GenerateMock<ILocationPublisher>();
             _mockLocationDal = GenerateMock<ILocationDal>();
-            _mockQueryable = GenerateMock<IQueryableRepositoryBase<LocationEntity>>();
-            _locationService = new LocationManager(_mockLocationDal.Object, _mockQueryable.Object, _mockLocationPublisher.Object);
+            _locationService = new LocationManager(_mockLocationDal.Object, _mockLocationPublisher.Object);
         }
 
         [Fact]
@@ -72,104 +70,15 @@ namespace SSTTEK.Location.Business.Tests.Concrete
         }
 
         [Fact]
-        public async Task Delete_WhenSetStateFail_ReturnFailResponse()
-        {
-            //Arrange
-            _mockQueryable.Setup(w => w.List<LocationResponse>(It.IsAny<FilterModel>(), null))
-                .Returns(Fixture.Create<Task<IListModel<LocationResponse>>>())
-                .Verifiable();
-            _mockLocationDal.Setup(w => w.SetState(It.IsAny<IEnumerable<LocationEntity>>(), OperationType.Delete))
-                .Returns((IEnumerable<LocationEntity>)null)
-                .Verifiable();
-
-            //Act
-            var result = await _locationService.Delete(Fixture.Create<FilterModel>());
-
-            //Assert
-            Assert.False(result.IsSuccessful);
-            Assert.Equal("500", result.StatusCode.ToString());
-        }
-
-        [Fact]
-        public async Task Delete_WhenSetStateSuccess_ReturnSuccessResponse()
-        {
-            //Arrange
-            _mockQueryable.Setup(w => w.List<LocationResponse>(It.IsAny<FilterModel>(), null))
-                .Returns(Fixture.Create<Task<IListModel<LocationResponse>>>())
-                .Verifiable();
-            _mockLocationDal.Setup(w => w.SetState(It.IsAny<IEnumerable<LocationEntity>>(), OperationType.Delete))
-                .Returns(Fixture.Create<IEnumerable<LocationEntity>>())
-                .Verifiable();
-
-            //Act
-            var result = await _locationService.Delete(Fixture.Create<FilterModel>());
-
-            //Assert
-            Assert.True(result.IsSuccessful);
-            Assert.Equal("201", result.StatusCode.ToString());
-        }
-
-        [Fact]
-        public async Task GetList_WhenListIsEmpty_ReturnFailResponse()
-        {
-
-            //Arrange
-            var data = Fixture.Create<Task<IListModel<LocationResponse>>>();
-            data.Result.Items = new List<LocationResponse>();
-            _mockQueryable.Setup(w => w.List<LocationResponse>(It.IsAny<FilterModel>(), null))
-                .Returns(data)
-                .Verifiable();
-
-            //Act
-            var result = await _locationService.GetList(Fixture.Create<FilterModel>());
-
-            //Assert
-            Assert.False(result.IsSuccessful);
-            Assert.Equal("404", result.StatusCode.ToString());
-        }
-
-        [Fact]
         public async Task GetList_WhenDataFound_ReturnSuccessResponse()
         {
             //Arrange
-            _mockQueryable.Setup(w => w.List<LocationResponse>(It.IsAny<FilterModel>(), null))
-                .Returns(Fixture.Create<Task<IListModel<LocationResponse>>>())
+            _mockLocationDal.Setup(w => w.GetListAsync(null))
+                .Returns(Fixture.Create<Task<List<LocationEntity>>>())
                 .Verifiable();
 
             //Act
-            var result = await _locationService.GetList(Fixture.Create<FilterModel>());
-
-            //Assert
-            Assert.True(result.IsSuccessful);
-            Assert.Equal("200", result.StatusCode.ToString());
-        }
-
-        [Fact]
-        public async Task Get_WhenDataNotFound_ReturnFailResponse()
-        {
-
-            //Arrange
-            _mockQueryable.Setup(w => w.FirstOrDefault<LocationResponse>(It.IsAny<FilterModel>(), null))
-                .Returns(Task.FromResult<LocationResponse>(null)).Verifiable();
-
-            //Act
-            var result = await _locationService.Get(Fixture.Create<FilterModel>());
-
-            //Assert
-            Assert.False(result.IsSuccessful);
-            Assert.Equal("404", result.StatusCode.ToString());
-        }
-
-        [Fact]
-        public async Task Get_WhenDataFound_ReturnSuccessResponse()
-        {
-            //Arrange
-            _mockQueryable.Setup(w => w.FirstOrDefault<LocationResponse>(It.IsAny<FilterModel>(), null))
-                .Returns(Fixture.Create<Task<LocationResponse>>())
-                .Verifiable();
-
-            //Act
-            var result = await _locationService.Get(Fixture.Create<FilterModel>());
+            var result = await _locationService.GetList();
 
             //Assert
             Assert.True(result.IsSuccessful);
@@ -192,48 +101,6 @@ namespace SSTTEK.Location.Business.Tests.Concrete
             Assert.Equal("500", result.StatusCode.ToString());
         }
 
-        [Fact]
-        public async Task Update_WhenSetStateSuccess_ReturnSuccessResponse()
-        {
-            //Arrange
-            var getResponse = Fixture.Create<Task<Response<LocationResponse>>>();
-            getResponse.Result.IsSuccessful = true;
-            getResponse.Result.Data = new LocationResponse { Name = "Test" };
-            _mockLocationDal.Setup(w => w.SetState(It.IsAny<LocationEntity>(), OperationType.Update))
-                .Returns(Fixture.Create<LocationEntity>())
-                .Verifiable();
-            _mockLocationPublisher.Setup(w => w.PublishLocationModifiedEvent(It.IsAny<LocationModifiedEvent>()))
-                .Verifiable();
-            _mockQueryable.Setup(w => w.FirstOrDefault<LocationResponse>(It.IsAny<FilterModel>(), null))
-                .Returns(Task.FromResult(Fixture.Create<LocationResponse>()))
-                .Verifiable();
-
-            //Act
-            var result = await _locationService.Update(Fixture.Create<UpdateLocationRequest>());
-
-            //Assert
-            Assert.True(result.IsSuccessful);
-            Assert.Equal("201", result.StatusCode.ToString());
-        }
-
-        [Fact]
-        public async Task Update_WhenDataNotFound_ReturnSuccessResponse()
-        {
-            //Arrange
-            _mockLocationDal.Setup(w => w.SetState(It.IsAny<LocationEntity>(), OperationType.Update))
-                .Returns(Fixture.Create<LocationEntity>())
-                .Verifiable();
-            _mockQueryable.Setup(w => w.FirstOrDefault<LocationResponse>(It.IsAny<FilterModel>(), null))
-                .Returns(Task.FromResult<LocationResponse>(null))
-                .Verifiable();
-
-            //Act
-            var result = await _locationService.Update(Fixture.Create<UpdateLocationRequest>());
-
-            //Assert
-            Assert.False(result.IsSuccessful);
-            Assert.Equal("404", result.StatusCode.ToString());
-        }
-
+       
     }
 }

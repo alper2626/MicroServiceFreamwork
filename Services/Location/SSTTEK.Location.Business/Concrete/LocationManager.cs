@@ -1,9 +1,7 @@
-﻿using AutoMapperAdapter; 
-using EntityBase.Concrete;
+﻿using AutoMapperAdapter;
 using EntityBase.Enum;
 using EntityBase.Poco.Responses;
 using RestHelpers.Constacts;
-using ServerBaseContract.Repository.Abstract;
 using SSTTEK.Location.AmqpService.Publisher.Location;
 using SSTTEK.Location.Business.Contracts;
 using SSTTEK.Location.DataAccess.Contract;
@@ -16,13 +14,11 @@ namespace SSTTEK.Location.Business.Concrete
     public class LocationManager : ILocationService
     {
         ILocationDal _locationDal;
-        IQueryableRepositoryBase<LocationEntity> _queryableRepositoryBase;
         ILocationPublisher _locationPublisher;
 
-        public LocationManager(ILocationDal locationDal, IQueryableRepositoryBase<LocationEntity> queryableRepositoryBase, ILocationPublisher locationPublisher)
+        public LocationManager(ILocationDal locationDal, ILocationPublisher locationPublisher)
         {
             _locationDal = locationDal;
-            _queryableRepositoryBase = queryableRepositoryBase;
             _locationPublisher = locationPublisher;
         }
 
@@ -33,50 +29,40 @@ namespace SSTTEK.Location.Business.Concrete
             {
                 return Response<CreateLocationRequest>.Fail(CommonMessage.ServerError, 500);
             }
-            return Response<CreateLocationRequest>.Success(CommonMessage.Success, 200);
+            return Response<CreateLocationRequest>.Success(request, 200);
         }
 
-        public async Task<Response<IEnumerable<LocationResponse>>> Delete(FilterModel request)
+        public async Task<Response<LocationResponse>> Delete(Guid id)
         {
-            var res = await _queryableRepositoryBase.List<LocationResponse>(request);
-            var entities = AutoMapperWrapper.Mapper.Map<List<LocationEntity>>(res.Items);
-            if (_locationDal.SetState(entities, OperationType.Delete) == null)
-            {
-                return Response<IEnumerable<LocationResponse>>.Fail(CommonMessage.ServerError, 500);
-            }
-            return Response<IEnumerable<LocationResponse>>.Success(res.Items, 201);
-        }
-
-        public async Task<Response<IEnumerable<LocationResponse>>> GetList(FilterModel request)
-        {
-            var res = await _queryableRepositoryBase.List<LocationResponse>(request);
-
-            if (!res.Items.Any())
-            {
-                return Response<IEnumerable<LocationResponse>>.Fail(CommonMessage.NotFound, 404);
-            }
-            return Response<IEnumerable<LocationResponse>>.Success(res.Items, 200);
-        }
-
-        public async Task<Response<LocationResponse>> Get(FilterModel request)
-        {
-            var res = await _queryableRepositoryBase.FirstOrDefault<LocationResponse>(request);
+            
+            var res = await _locationDal.GetAsync(w => w.Id == id);
 
             if (res == null)
             {
                 return Response<LocationResponse>.Fail(CommonMessage.NotFound, 404);
             }
-            return Response<LocationResponse>.Success(res, 200);
+
+            if (_locationDal.SetState(res, OperationType.Delete) == null)
+            {
+                return Response<LocationResponse>.Fail(CommonMessage.ServerError, 500);
+            }
+            return Response<LocationResponse>.Success(AutoMapperWrapper.Mapper.Map<LocationResponse>(res), 201);
         }
+
+        public async Task<Response<IEnumerable<LocationResponse>>> GetList()
+        {
+            return Response<IEnumerable<LocationResponse>>.Success(AutoMapperWrapper.Mapper.Map<List<LocationResponse>>(await _locationDal.GetListAsync()), 200);
+        }
+
 
         public async Task<Response<UpdateLocationRequest>> Update(UpdateLocationRequest request)
         {
             //Not : ContactInformation da mail telefon konum gibi farklı bilgiler tutulduğu için LocationId bilgisini yazamadım.
             //Bu yüzden ContactInformation Modulde Content alanına index attım eski ismi ile sorgulatıp update edeceğim.
-            var data = await this.Get(FilterModel.Get(nameof(LocationEntity.Id), FilterOperator.Equals, request.Id));
-            if (!data.IsSuccessful)
+            var data = await _locationDal.GetAsync(w => w.Id == request.Id);
+            if (data == null)
             {
-                return data.FailConvert<UpdateLocationRequest>();
+                return Response<UpdateLocationRequest>.Fail(CommonMessage.NotFound, 404);
             }
 
             var res = _locationDal.SetState(AutoMapperWrapper.Mapper.Map<UpdateLocationRequest, LocationEntity>(request), OperationType.Update);
@@ -90,12 +76,12 @@ namespace SSTTEK.Location.Business.Concrete
                 EventOwner = "Location Manager -->  Update",
                 EventCreatedTime = DateTime.Now,
                 NewName = request.Name,
-                OldName = data.Data.Name.ToLower()
+                OldName = data.Name.ToLower()
             };
 
             await _locationPublisher.PublishLocationModifiedEvent(@event);
 
-            return Response<UpdateLocationRequest>.Success(CommonMessage.Success, 201);
+            return Response<UpdateLocationRequest>.Success(request, 201);
         }
     }
 }

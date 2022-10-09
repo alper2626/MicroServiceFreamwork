@@ -11,12 +11,14 @@ namespace SSTTEK.ContactInformation.Business.Contracts
         [RemoveRedisCacheAspect("locationreport")]
         Task<Response<CreateContactInformationRequest>> Create(CreateContactInformationRequest request);
 
-        Task<Response<IEnumerable<ContactInformationResponse>>> GetList(FilterModel request);
+        Task<Response<List<CreateContactInformationRequest>>> Create(List<CreateContactInformationRequest> request);
+
+        Task<Response<List<ContactInformationResponse>>> GetList(FilterModel request);
 
         Task<Response<ContactInformationResponse>> Get(FilterModel request);
 
         [RemoveRedisCacheAspect("locationreport")]
-        Task<Response<IEnumerable<ContactInformationResponse>>> Remove(FilterModel request);
+        Task<Response<List<ContactInformationResponse>>> Remove(FilterModel request);
 
         Task UpdateLocationNamesEventConsume(LocationModifiedEvent @event);
     }

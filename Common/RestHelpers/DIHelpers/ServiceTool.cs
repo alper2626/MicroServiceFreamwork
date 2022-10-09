@@ -15,7 +15,7 @@ namespace RestHelpers.DIHelpers
         /// <returns></returns>
         public static IServiceCollection Create(IServiceCollection services)
         {
-            
+
             ServiceProvider = services.BuildServiceProvider();
 
             return services;
@@ -24,7 +24,9 @@ namespace RestHelpers.DIHelpers
         public static T GetRootService<T>()
         {
             var httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
-            return httpContextAccessor.HttpContext.RequestServices.GetRequiredService<T>();
+            if (httpContextAccessor.HttpContext != null)
+                return httpContextAccessor.HttpContext.RequestServices.GetRequiredService<T>();
+            return ServiceProvider.GetService<T>();
         }
 
     }

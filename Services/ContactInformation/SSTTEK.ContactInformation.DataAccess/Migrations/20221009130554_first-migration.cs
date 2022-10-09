@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SSTTEK.ContactInformation.DataAccess.Migrations
 {
-    public partial class firstmig : Migration
+    public partial class firstmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,14 +18,24 @@ namespace SSTTEK.ContactInformation.DataAccess.Migrations
                     ContactInformationType = table.Column<int>(type: "integer", nullable: false),
                     Content = table.Column<string>(type: "text", nullable: false),
                     ContentIndex = table.Column<string>(type: "text", nullable: false),
-                    CreateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdateTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IsRemoved = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ContactInformations", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContactInformations_ContactEntityId",
+                table: "ContactInformations",
+                column: "ContactEntityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContactInformations_ContactInformationType_IsRemoved",
+                table: "ContactInformations",
+                columns: new[] { "ContactInformationType", "IsRemoved" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ContactInformations_ContentIndex",

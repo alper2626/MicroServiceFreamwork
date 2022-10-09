@@ -2,6 +2,7 @@
 using AutoMapperAdapter;
 using EntityBase.Abstract;
 using EntityBase.Concrete;
+using EntityBase.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Tools.Tests.QueryableExtension
         public void ApplyAllFilter_WhenFilterModelNull_ThrowException()
         {
             var queryable = new List<TestClass>() { new TestClass { Name = "testtest" } }.AsQueryable();
-            Assert.Throws<Exception>(() => FilterBuilder.ApplyAllFilter<TestClassTwo, TestClass>(queryable, null));
+            Assert.Throws<CustomErrorException>(() => FilterBuilder.ApplyAllFilter<TestClassTwo, TestClass>(queryable, null));
         }
 
         [Fact]
@@ -66,7 +67,7 @@ namespace Tools.Tests.QueryableExtension
         public void ApplyDynamicFilter_WhenFiltersNotContainingFromModel_ThrowException(string prop)
         {
             var queryable = new List<TestClass>() { new TestClass { Name = "testtest" } }.AsQueryable();
-            Assert.Throws<Exception>(() => FilterBuilder.ApplyDynamicFilter<TestClass>(queryable, new List<FilterItem> { new FilterItem { Prop = prop, Operator = EntityBase.Enum.FilterOperator.Equals, Value = "test" } }));
+            Assert.Throws<CustomErrorException>(() => FilterBuilder.ApplyDynamicFilter<TestClass>(queryable, new List<FilterItem> { new FilterItem { Prop = prop, Operator = EntityBase.Enum.FilterOperator.Equals, Value = "test" } }));
         }
 
 

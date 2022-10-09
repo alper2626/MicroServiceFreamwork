@@ -14,10 +14,12 @@ using RedisCacheService.Models;
 using RestHelpers.DIHelpers;
 using ServerBaseContract;
 using SSTTEK.ContactInformation.Api.Middlewares;
+using SSTTEK.ContactInformation.Consumer.Consumer.ContactInformation;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 var businessAssembly = Assembly.Load(Assembly.GetExecutingAssembly().GetReferencedAssemblies().SingleOrDefault(q => q.FullName.Contains("SSTTEK.ContactInformation.Business")));
+
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 #region Add Interceptors
@@ -81,6 +83,9 @@ builder.Services.AddSingleton<DatabaseOptions>(sp =>
 
 #region Add MassTransit
 
+ContactInformationCreatedConsumer wakeupService = new ContactInformationCreatedConsumer();
+var amqpAssembly = Assembly.Load(Assembly.GetExecutingAssembly().GetReferencedAssemblies().SingleOrDefault(q => q.FullName.Contains("Consumer")));
+
 builder.Services.AddRabbitMqModules(
     new AmqpBase.Model.RabbitMqOptions
     {
@@ -88,7 +93,7 @@ builder.Services.AddRabbitMqModules(
         Password = builder.Configuration["RabbitMq:Password"],
         UserName = builder.Configuration["RabbitMq:UserName"],
         Port = ushort.Parse(builder.Configuration["RabbitMq:Port"]),
-    });
+    }, amqpAssembly);
 
 #endregion
 
@@ -117,7 +122,7 @@ builder.Services.AddRedis(new RedisOptions
 
 #region AutoMapper Configuration
 
-AutoMapperWrapper.Configure();
+AutoMapperWrapper.Configure(Assembly.Load("SSTTEK.MassTransitCommon"));
 
 #endregion
 

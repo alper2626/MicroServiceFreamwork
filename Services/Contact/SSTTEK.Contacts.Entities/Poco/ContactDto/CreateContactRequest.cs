@@ -12,7 +12,23 @@ namespace SSTTEK.Contact.Entities.Poco.ContactDto
 
         public string Firm { get; set; }
 
-        public List<CreateContactInformationRequest> ContactInformations { get; set; }
+        private List<CreateContactInformationRequest> contactInformations;
+
+        public List<CreateContactInformationRequest> ContactInformations
+        {
+            get
+            {
+                return contactInformations;
+            }
+            set
+            {
+                foreach (var item in value)
+                {
+                    item.ContactEntityId = this.Id;
+                }
+                contactInformations = value;
+            }
+        }
 
         [JsonIgnore]
         public bool IsRemoved => false;

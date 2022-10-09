@@ -1,0 +1,86 @@
+version: "3.9"
+services:
+    mssql:
+        image: 'mcr.microsoft.com/mssql/server'
+        container_name: 'ContactDb'
+        restart: always
+        ports:
+            - '1433:1433'
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=Neslican26*
+        volumes:
+            - 'ContactVolume'
+            
+    postgresql:
+        image: postgres:latest
+        container_name: contactinformationpostgresql
+        restart: always
+        environment:
+        - POSTGRES_USER=abasda
+        - POSTGRES_PASSWORD=Neslican26*
+        ports:
+        - '5555:5432'
+        volumes: 
+        - 'contactInformationVolume'
+    
+    cache:
+        image: redis:latest
+        container_name: ssttekredis
+        restart: always
+        ports:
+          - '6379:6379'
+        command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+        volumes: 
+            - cache:/data
+    rabbitmq:
+        container_name: phonebookrabbitmq
+        image: rabbitmq:3.10.6-management
+        ports:
+            - 5672:5672
+            - 15672:15672
+        environment:
+            - RABBITMQ_DEFAULT_USER=abasda
+            - RABBITMQ_DEFAULT_PASS=Neslican26*-
+        volumes:
+            - rabbitmq-data:/usr/share/rabbitmq/data
+    
+    mongodb:
+        image: mongo:latest
+        container_name: locationDb
+        restart: unless-stopped
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: abasda
+            MONGO_INITDB_ROOT_PASSWORD: Neslican2626
+        ports:
+            - 27017:27017
+        volumes:
+            - mongodb
+        networks:
+            - mongonetwork    
+        healthcheck:
+            test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+            retries: 5
+            interval: 15s
+            start_period: 30s
+    
+volumes:
+    ssttekredis:
+        driver: local
+    postgresql:
+        driver: local    
+    mssql:
+        driver: local
+    rabbitmq-data:
+        driver: local
+    locationDb:
+        name: locationVolume
+        driver: local
+        external: false
+    cache:
+        driver: local
+
+networks:
+  mongonetwork:
+    name: mongonetwork
+    driver: bridge    

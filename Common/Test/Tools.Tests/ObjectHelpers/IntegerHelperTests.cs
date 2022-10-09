@@ -7,7 +7,6 @@ namespace Tools.Tests.ObjectHelpers
     {
         [Theory]
         [InlineData(5)]
-        [InlineData(2)]
         public void CreateNumber_LengthTest(int length)
         {
             var calculated = IntegerHelper.CreateNumber(length);

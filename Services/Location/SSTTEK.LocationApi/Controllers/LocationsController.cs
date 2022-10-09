@@ -30,21 +30,15 @@ namespace SSTTEK.Location.Api.Controllers
         }
 
         [HttpPost("get")]
-        public async Task<IActionResult> Get(FilterModel request)
+        public async Task<IActionResult> List()
         {
-            return CreateActionResult(await _locationService.Get(request));
-        }
-
-        [HttpPost("list")]
-        public async Task<IActionResult> List(FilterModel request)
-        {
-            return CreateActionResult(await _locationService.GetList(request));
+            return CreateActionResult(await _locationService.GetList());
         }
 
         [HttpDelete("delete")]
-        public async Task<IActionResult> Delete(FilterModel request)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            return CreateActionResult(await _locationService.Delete(request));
+            return CreateActionResult(await _locationService.Delete(id));
         }
     }
 }

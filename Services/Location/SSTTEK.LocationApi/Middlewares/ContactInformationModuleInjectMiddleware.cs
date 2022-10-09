@@ -16,8 +16,6 @@ namespace SSTTEK.Location.Api.Middlewares
             services.AddTransient<ILocationService, LocationManager>();
             services.AddTransient<ILocationDal, LocationDal>();
 
-            services.AddScoped(typeof(IQueryableRepositoryBase<>), typeof(MongoDbQueryableRepositoryBase<>));
-
             services.AddTransient<ILocationPublisher, LocationPublisher>();
 
             return services;

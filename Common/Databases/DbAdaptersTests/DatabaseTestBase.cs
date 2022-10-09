@@ -67,14 +67,7 @@ namespace DbAdaptersTests
     {
         protected override void AddServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IQueryableRepositoryBase<TestMongoEntity>>(sp =>
-            {
-                return new MongoDbQueryableRepositoryBase<TestMongoEntity>(new ServerBaseContract.DatabaseOptions()
-                {
-                    ConnectionString = configuration["DatabaseOptions:ConnectionString"],
-                    DatabaseName = configuration["DatabaseOptions:DatabaseName"],
-                });
-            });
+            
             services.AddTransient<IEntityRepositoryBase<TestMongoEntity>>(sp =>
             {
                 return new MongoDbRepositoryBase<TestMongoEntity>(new ServerBaseContract.DatabaseOptions()

@@ -21,7 +21,7 @@ namespace SSTTEK.Contact.Business.Concrete
         IQueryableRepositoryBase<ContactEntity> _queryableRepositoryBase;
         IContactInformationClient _contactInformationClient;
         IContactInformationSender _contactInformationSender;
-
+        
         public ContactManager(IContactDal contactDal, IQueryableRepositoryBase<ContactEntity> queryableRepositoryBase, IContactInformationClient contactInformationClient, IContactInformationSender contactInformationSender)
         {
             _contactDal = contactDal;
@@ -47,17 +47,22 @@ namespace SSTTEK.Contact.Business.Concrete
                 item.EventOwner = "ContactManager --> Create";
             });
             await _contactInformationSender.PublishContactInformations(command);
-            return Response<CreateContactRequest>.Success(CommonMessage.Success, 200);
+            return Response<CreateContactRequest>.Success(request, 200);
         }
 
         public async Task<Response<IEnumerable<ContactResponse>>> Delete(FilterModel request)
         {
-            var res = await _queryableRepositoryBase.List<ContactResponse>(request,null);
+            var res = await _queryableRepositoryBase.List<ContactResponse>(request, null);
             var entities = AutoMapperWrapper.Mapper.Map<List<ContactEntity>>(res.Items);
             if (_contactDal.SetState(entities, OperationType.Delete) == null)
             {
                 return Response<IEnumerable<ContactResponse>>.Fail(CommonMessage.ServerError, 500);
             }
+            foreach (var item in entities)
+            {
+                await _contactInformationSender.PublishContactDeletedCommand(new ContactDeletedCommand { ContactEntityId = item.Id });
+            }
+
             return Response<IEnumerable<ContactResponse>>.Success(res.Items, 201);
         }
 
@@ -85,9 +90,9 @@ namespace SSTTEK.Contact.Business.Concrete
 
         public async Task<Response<ContactDetailedResponse>> GetWithDetail(FilterModel request)
         {
-            var res = await _queryableRepositoryBase.FirstOrDefault<ContactDetailedResponse>(request);
+            var res = await _queryableRepositoryBase.FirstOrDefault<ContactResponse>(request);
 
-            if (res == null)
+            if (res == null || res.Id == Guid.Empty)
             {
                 return Response<ContactDetailedResponse>.Fail(CommonMessage.NotFound, 404);
             }
@@ -97,9 +102,8 @@ namespace SSTTEK.Contact.Business.Concrete
             {
                 return httpRes.FailConvert<ContactDetailedResponse>();
             }
-
-            res.Informations = httpRes.Data;
-            return Response<ContactDetailedResponse>.Success(res, 200);
+            
+            return Response<ContactDetailedResponse>.Success(new ContactDetailedResponse { Contact = res, Informations = httpRes.Data }, 200);
 
         }
 
@@ -111,6 +115,10 @@ namespace SSTTEK.Contact.Business.Concrete
             {
                 return Response<IEnumerable<ContactResponse>>.Fail(CommonMessage.ServerError, 500);
             }
+            foreach (var item in entities)
+            {
+                await _contactInformationSender.PublishContactDeletedCommand(new ContactDeletedCommand { ContactEntityId = item.Id });
+            }
             return Response<IEnumerable<ContactResponse>>.Success(res.Items, 201);
         }
 
@@ -121,7 +129,7 @@ namespace SSTTEK.Contact.Business.Concrete
             {
                 return Response<UpdateContactRequest>.Fail(CommonMessage.ServerError, 500);
             }
-            return Response<UpdateContactRequest>.Success(CommonMessage.Success, 201);
+            return Response<UpdateContactRequest>.Success(request, 201);
         }
     }
 }

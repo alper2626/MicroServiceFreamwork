@@ -12,8 +12,8 @@ using SSTTEK.Contact.DataAccess.Context;
 namespace SSTTEK.Contact.DataAccess.Migrations
 {
     [DbContext(typeof(ContactModuleContext))]
-    [Migration("20221007212527_firstmig")]
-    partial class firstmig
+    [Migration("20221009130433_first-migration")]
+    partial class firstmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

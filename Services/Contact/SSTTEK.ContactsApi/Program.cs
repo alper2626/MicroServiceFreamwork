@@ -1,8 +1,5 @@
 using AmqpBase.MassTransit.RabbitMq.Middlewares;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using AutoMapperAdapter;
-using CastleInterceptors.AutoFacModule;
 using CommonMiddlewares;
 using FluentValidation.AspNetCore;
 using FluentValidationAdapter;
@@ -17,19 +14,7 @@ using SSTTEK.Contact.Business.HttpClients.Handler;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-var businessAssembly = Assembly.Load(Assembly.GetExecutingAssembly().GetReferencedAssemblies().SingleOrDefault(q => q.FullName.Contains("SSTTEK.Contact.Business")));
 
-
-#region Add Interceptors
-
-builder.Host
-    .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-    .ConfigureContainer<ContainerBuilder>(cfg =>
-    {
-        cfg.RegisterModule(new InterceptorsAutoFacModule(businessAssembly));
-    });
-
-#endregion
 
 #region Add Controllers And Filters
 
@@ -94,7 +79,7 @@ builder.Services.AddRabbitMqModules(
 
 #region AutoMapper Configuration
 
-AutoMapperWrapper.Configure();
+AutoMapperWrapper.Configure(Assembly.Load("SSTTEK.MassTransitCommon"));
 
 #endregion
 
@@ -106,7 +91,7 @@ builder.Services.AddSwaggerGen();
 /// Module DI's Added.
 /// </summary>
 builder.Services.InjectContact(
-    new DatabaseOptions {ConnectionString = builder.Configuration["DatabaseOptions:ConnectionString"],DatabaseName = builder.Configuration["DatabaseOptions:DatabaseName"] },
+    new DatabaseOptions { ConnectionString = builder.Configuration["DatabaseOptions:ConnectionString"], DatabaseName = builder.Configuration["DatabaseOptions:DatabaseName"] },
     Convert.ToBoolean(builder.Configuration["DatabaseChanged"]));
 
 /// <summary>

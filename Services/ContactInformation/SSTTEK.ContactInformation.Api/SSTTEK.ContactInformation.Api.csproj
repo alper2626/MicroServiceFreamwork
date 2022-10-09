@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\CommonMiddlewares\CommonMiddlewares.csproj" />
+    <ProjectReference Include="..\Amqp\SSTTEK.ContactInformation.Consumer\SSTTEK.ContactInformation.Consumer.csproj" />
     <ProjectReference Include="..\SSTTEK.ContactInformation.Business\SSTTEK.ContactInformation.Business.csproj" />
   </ItemGroup>
 

@@ -1,20 +1,18 @@
 ﻿using EntityBase.Poco.Responses;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace Tools.ObjectHelpers
 {
     public static class HttpContentHelper
     {
         public static async Task<Response<T>> ContentToObject<T>(HttpContent content)
-            where T: class ,new()
+            where T : class, new()
         {
-            using var stream =
-            await content.ReadAsStreamAsync();
+            var str = await content.ReadAsStringAsync();
 
-            if (stream == null)
+            if (string.IsNullOrEmpty(str))
                 return null;
-
-            return await JsonSerializer.DeserializeAsync<Response<T>>(stream);
+            return JsonConvert.DeserializeObject<Response<T>>(str);
         }
     }
 }
